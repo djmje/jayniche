@@ -1,0 +1,108 @@
+---
+import { site, hasPhone } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+  title: string; // keep under 60 characters
+  description: string; // keep around 150 characters
+  schema?: object[]; // JSON-LD blocks for this page
+  ogImage?: string;
+}
+
+const { title, description, schema = [], ogImage = '/og-image.png' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImageUrl = new URL(ogImage, site.url).href;
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#14532d" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="en_CA" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {site.googleSiteVerification && (
+      <meta name="google-site-verification" content={site.googleSiteVerification} />
+    )}
+
+    {schema.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+
+    {site.ga4Id && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.ga4Id}`}></script>
+        <script is:inline define:vars={{ id: site.ga4Id }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', id);
+        </script>
+      </>
+    )}
+
+    {site.metaPixelId && (
+      <script is:inline define:vars={{ id: site.metaPixelId }}>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', id);
+        fbq('track', 'PageView');
+      </script>
+    )}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="logo" href="/">{site.name}</a>
+        {hasPhone ? (
+          <a class="btn btn-call" href={`tel:${site.phoneE164}`}>Call {site.phoneDisplay}</a>
+        ) : (
+          <a class="btn btn-call" href="/#form">Get my offer</a>
+        )}
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p class="footer-brand">{site.name}</p>
+        <p>We buy houses for cash in Ontario and Alberta.</p>
+        {hasPhone && (
+          <p><a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a></p>
+        )}
+        {site.email && (
+          <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        )}
+        <p class="disclaimer">
+          {site.name} is a private home buyer, not a real estate brokerage, and does not
+          list or market homes for sale on behalf of sellers.
+        </p>
+        <p class="footer-links">
+          <a href="/privacy/">Privacy policy</a>
+          <a href={site.instagram} rel="noopener">Instagram</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

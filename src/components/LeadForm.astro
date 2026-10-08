@@ -1,0 +1,138 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  heading?: string;
+  province?: 'Ontario' | 'Alberta'; // preselects the province on province/city pages
+}
+
+const { heading = 'Get your free cash offer', province } = Astro.props;
+---
+
+<div class="lead-form-card">
+  <h2 class="form-heading">{heading}</h2>
+  <p class="form-sub">Takes about a minute. No obligation.</p>
+
+  <form class="lead-form" method="POST" action={site.formEndpoint || '#'} data-endpoint={site.formEndpoint}>
+    <input type="hidden" name="source_page" value={Astro.url.pathname} />
+    <input type="hidden" name="_subject" value="New seller lead: jayniche.ca" />
+
+    <label>
+      Property address
+      <input type="text" name="address" autocomplete="street-address" required />
+    </label>
+
+    <fieldset>
+      <legend>Province</legend>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="province" value="Ontario" required checked={province === 'Ontario'} /> Ontario</label>
+        <label class="choice"><input type="radio" name="province" value="Alberta" checked={province === 'Alberta'} /> Alberta</label>
+      </div>
+    </fieldset>
+
+    <label>
+      Property condition
+      <select name="condition" required>
+        <option value="">Choose one</option>
+        <option>Move-in ready</option>
+        <option>Needs some work</option>
+        <option>Needs a lot of work</option>
+      </select>
+    </label>
+
+    <fieldset>
+      <legend>Is it listed with an agent right now?</legend>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="listed" value="No" required /> No</label>
+        <label class="choice"><input type="radio" name="listed" value="Yes" /> Yes</label>
+      </div>
+    </fieldset>
+
+    <label>
+      Who lives there now?
+      <select name="occupancy" required>
+        <option value="">Choose one</option>
+        <option>I live there</option>
+        <option>Tenants</option>
+        <option>Vacant</option>
+      </select>
+    </label>
+
+    <label>
+      When would you like to sell?
+      <select name="timeline" required>
+        <option value="">Choose one</option>
+        <option>As soon as possible</option>
+        <option>1–3 months</option>
+        <option>3–6 months</option>
+        <option>Just exploring</option>
+      </select>
+    </label>
+
+    <label>
+      Your name
+      <input type="text" name="name" autocomplete="name" required />
+    </label>
+
+    <label>
+      Phone number
+      <input type="tel" name="phone" autocomplete="tel" inputmode="tel" required />
+    </label>
+
+    <p class="consent">
+      By submitting, you agree to be contacted by phone or text about your property.
+      You can ask us to stop at any time. See our <a href="/privacy/">privacy policy</a>.
+    </p>
+
+    <button type="submit" class="btn btn-primary btn-block">Get my cash offer</button>
+    <p class="form-error" role="alert" hidden>
+      Something went wrong sending your details. Please try again or call us.
+    </p>
+  </form>
+
+  <div class="form-thanks" role="status" hidden>
+    <h3>Thanks, we got it.</h3>
+    <p>A real person will review your property and reach out by phone or text, usually within one business day.</p>
+  </div>
+</div>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>('.lead-form')) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const card = form.closest('.lead-form-card')!;
+      const error = form.querySelector<HTMLElement>('.form-error')!;
+      const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      const endpoint = form.dataset.endpoint;
+
+      error.hidden = true;
+      button.disabled = true;
+
+      try {
+        if (endpoint) {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' },
+          });
+          if (!response.ok) throw new Error(`Form endpoint returned ${response.status}`);
+        } else {
+          console.warn('No form endpoint set in src/data/site.ts; this submission was not sent.');
+        }
+
+        form.hidden = true;
+        card.querySelector<HTMLElement>('.form-thanks')!.hidden = false;
+
+        // Conversion events for GA4 and the Meta Pixel (each only fires if it's installed).
+        const w = window as any;
+        const page = form.querySelector<HTMLInputElement>('[name=source_page]')!.value;
+        w.gtag?.('event', 'generate_lead', { source_page: page });
+        w.fbq?.('track', 'Lead', { content_name: page });
+      } catch (err) {
+        console.error(err);
+        error.hidden = false;
+        button.disabled = false;
+      }
+    });
+  }
+</script>

@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { site, hasPhone } from '../data/site';
+
+const title = 'We Buy Houses in Ontario & Alberta | Jay Home Buyers';
+const description =
+  'Sell your house as-is in Ontario or Alberta. No repairs, no showings, no agent fees. Get a fair cash offer and pick your own closing date.';
+
+const faqs = [
+  {
+    q: 'How do you decide on your offer?',
+    a: 'We look at the property, the repairs it needs, and what similar homes nearby have sold for. A real person reviews every property, and we walk you through how we got to the number.',
+  },
+  {
+    q: 'Do I have to pay commissions or fees?',
+    a: 'No. There are no agent commissions. On homes we buy, we also cover your lawyer fees and the usual closing costs, so the offer you accept is what you walk away with, less anything owing on the property, like your mortgage.',
+  },
+  {
+    q: 'Do I need to clean or fix anything?',
+    a: 'No. We buy houses as-is. Leave behind what you don’t want and we’ll take care of it.',
+  },
+  {
+    q: 'How fast can you close?',
+    a: 'You pick the closing date. If you need to move quickly, we work toward that. If you need more time, that works too.',
+  },
+  {
+    q: 'Am I committed to anything if I fill out the form?',
+    a: 'No. Asking for an offer is free and there is no obligation to accept it.',
+  },
+  {
+    q: 'Are you a real estate agent?',
+    a: 'No. We are a private buyer, not a brokerage. We don’t list your home or show it to the public. If selling to us isn’t the best fit for your situation, we’ll tell you, and we can point you to other options.',
+  },
+];
+
+const situations = [
+  'Inherited or estate property',
+  'House needs major repairs, or has fire or water damage',
+  'Tenant-occupied rental',
+  'Behind on mortgage payments',
+  'Power of sale (Ontario) or foreclosure (Alberta)',
+  'Divorce or separation',
+  'Downsizing or relocating',
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: site.name,
+    url: site.url,
+    description,
+    ...(hasPhone && { telephone: site.phoneE164 }),
+    ...(site.email && { email: site.email }),
+    areaServed: [
+      { '@type': 'AdministrativeArea', name: 'Ontario' },
+      { '@type': 'AdministrativeArea', name: 'Alberta' },
+    ],
+    sameAs: [site.instagram],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-intro">
+        <h1>Sell your house as-is in Ontario or Alberta</h1>
+        <p class="lead">
+          No repairs, no cleanup, no showings. We make a fair cash offer, and you pick the closing date.
+        </p>
+      </div>
+      <div id="form" class="hero-form">
+        <LeadForm />
+      </div>
+      <div class="hero-points">
+        <ul class="checks">
+          <li>No agent commissions or closing costs</li>
+          <li>We cover your lawyer fees</li>
+          <li>You choose the closing date</li>
+          <li>Every offer reviewed by a real person, not a call centre</li>
+          <li>No pressure and no obligation</li>
+        </ul>
+        {hasPhone && (
+          <p class="hero-call">
+            Prefer to talk? <a href={`tel:${site.phoneE164}`}>Call {site.phoneDisplay}</a>
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>
+          <h3>Tell us about the property</h3>
+          <p>Fill out the short form or give us a call. It takes about a minute.</p>
+        </li>
+        <li>
+          <h3>Get a fair cash offer</h3>
+          <p>We review the details, may ask a few questions or arrange a quick visit, then make you a written offer.</p>
+        </li>
+        <li>
+          <h3>Pick your closing date</h3>
+          <p>If you accept, the lawyers handle the paperwork and you close on the date that works for you.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <h2>Situations we help with</h2>
+      <p>Most of the people we talk to are dealing with something more complicated than a regular sale.</p>
+      <ul class="tiles">
+        {situations.map((s) => <li>{s}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Where we buy</h2>
+      <p>We buy houses across Ontario and Alberta, in cities, towns and rural areas.</p>
+      <div class="areas">
+        <div>
+          <h3>Ontario</h3>
+          {site.cities.ontario.length > 0 && <p>{site.cities.ontario.join(' · ')}</p>}
+        </div>
+        <div>
+          <h3>Alberta</h3>
+          {site.cities.alberta.length > 0 && <p>{site.cities.alberta.join(' · ')}</p>}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap narrow">
+      <h2>Frequently asked questions</h2>
+      {faqs.map((f) => (
+        <details class="faq">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="wrap narrow center">
+      <h2>Find out what we can offer</h2>
+      <p>No obligation, and a real person reviews every property.</p>
+      <a class="btn btn-primary" href="#form">Get my free cash offer</a>
+      {hasPhone && <a class="btn btn-outline" href={`tel:${site.phoneE164}`}>Call {site.phoneDisplay}</a>}
+    </div>
+  </section>
+</Base>

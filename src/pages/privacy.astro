@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+const title = 'Privacy Policy | Jay Home Buyers';
+const description =
+  'How Jay Home Buyers collects, uses and protects the personal information you share when you ask for a cash offer on your property.';
+const contact = site.email || 'the contact details on this website';
+---
+
+<Base title={title} description={description}>
+  <section class="section">
+    <div class="wrap narrow">
+      <h1>Privacy policy</h1>
+      <p><em>Last updated: October 2026</em></p>
+
+      <h2>What we collect</h2>
+      <p>
+        When you fill out our form, call, or text us, we collect the information you give us: your name,
+        phone number, the property address and province, and details about the property such as its
+        condition, whether it is listed, who lives there, and your timeline. We also record which page of
+        this website you sent the form from.
+      </p>
+      <p>
+        Like most websites, we may use analytics and advertising tools (Google Analytics and the Meta
+        Pixel) that collect information about how you use the site, such as pages visited and the type of
+        device you use. These tools use cookies.
+      </p>
+
+      <h2>How we use it</h2>
+      <ul>
+        <li>To review your property and contact you by phone or text about an offer.</li>
+        <li>To understand which pages of our website are helpful, and to show our ads to people who have visited it.</li>
+        <li>
+          If buying your property ourselves isn’t the right fit, and only with your permission, to connect you
+          with a real estate professional who may be able to help.
+        </li>
+      </ul>
+      <p>We do not sell your personal information.</p>
+
+      <h2>Who we share it with</h2>
+      <p>
+        We use service providers to run this website, receive form submissions and store our records. They
+        handle your information only to provide those services to us. Some of these providers may store
+        information outside Canada, where it may be subject to the laws of that country.
+      </p>
+
+      <h2>How long we keep it</h2>
+      <p>We keep your information only as long as we need it for the purposes above, or as required by law.</p>
+
+      <h2>Your choices</h2>
+      <p>
+        You can ask us to stop contacting you at any time, including by replying STOP to a text. You can also
+        ask to see the personal information we hold about you, ask us to correct it, or ask us to delete it, by
+        contacting us at {contact}.
+      </p>
+
+      <h2>Questions</h2>
+      <p>If you have questions about this policy or how we handle your information, contact us at {contact}.</p>
+    </div>
+  </section>
+</Base>
