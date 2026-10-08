@@ -3,6 +3,7 @@ import ContentPage from '../../layouts/ContentPage.astro';
 import { citiesIn } from '../../data/cities';
 import { situationsFor } from '../../data/situations';
 import { localBusinessSchema } from '../../lib/schema';
+import { ontarioRegions } from '../../data/regions';
 
 export function getStaticPaths() {
   return [{ params: { province: 'ontario' } }, { params: { province: 'alberta' } }];
@@ -16,13 +17,13 @@ const situations = situationsFor(province);
 
 const title = `We Buy Houses in ${name} | Cash Offer, Any Condition`;
 const description = isOn
-  ? 'Sell your Ontario house as-is for cash: Toronto, Ottawa, London, Kitchener-Waterloo, Windsor, Sudbury and beyond. No repairs, showings or commissions.'
+  ? 'Sell your Ontario house as-is for cash, from the GTA, Hamilton and Niagara to Ottawa, London, Windsor and the North. No repairs, showings or commissions.'
   : 'Sell your Alberta house as-is for cash: Calgary, Edmonton, Red Deer, Lethbridge and beyond. No repairs, showings or commissions. You pick the closing date.';
 
 const faqs = isOn
   ? [
       { q: 'Do I pay land transfer tax when I sell in Ontario?', a: 'No. In Ontario, land transfer tax is paid by the buyer, not the seller.' },
-      { q: 'Do you buy outside the cities listed?', a: 'Yes. We buy across Ontario, including towns and rural properties. Send us the address and we’ll let you know.' },
+      { q: 'Do you buy outside the cities listed?', a: 'Yes. We buy anywhere in Ontario, including smaller towns, cottage country and rural properties. Send us the address and we’ll let you know.' },
       { q: 'Can you buy an estate property before probate is done?', a: 'We can agree on terms early, but Ontario says the estate certificate should be in hand before an agreement of purchase and sale is signed. We’ll set the closing for when the estate is ready.' },
     ]
   : [
@@ -46,11 +47,36 @@ const faqs = isOn
 >
   <section class="section">
     <div class="wrap prose">
-      <h2>Cities we buy in</h2>
-      <ul class="link-grid">
-        {cities.map((c) => <li><a href={`/${province}/${c.slug}/`}>Sell your house in {c.name}</a></li>)}
-      </ul>
-      <p>Don’t see your town? We buy across {name}. Send us the address.</p>
+      {isOn ? (
+        <>
+          <h2 id="regions">Regions we buy in</h2>
+          <p>We buy houses everywhere in Ontario. Here are the main cities and towns in each region. Ones with their own page are linked.</p>
+          <div class="regions">
+            {ontarioRegions.map((r) => (
+              <div class="region" id={r.id}>
+                <h3>{r.name}</h3>
+                <p class="region-blurb">{r.blurb}</p>
+                <ul class="tags">
+                  {r.cities.map((c) => <li class={c.slug ? 'linked' : undefined}>{c.slug ? <a href={`/ontario/${c.slug}/`}>{c.name}</a> : c.name}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <h3>Detailed city guides</h3>
+          <ul class="link-grid">
+            {cities.map((c) => <li><a href={`/ontario/${c.slug}/`}>Sell your house in {c.name}</a></li>)}
+          </ul>
+          <p>Smaller town or rural property? We buy those too. Send us the address.</p>
+        </>
+      ) : (
+        <>
+          <h2>Cities we buy in</h2>
+          <ul class="link-grid">
+            {cities.map((c) => <li><a href={`/${province}/${c.slug}/`}>Sell your house in {c.name}</a></li>)}
+          </ul>
+          <p>Don’t see your town? We buy across {name}. Send us the address.</p>
+        </>
+      )}
 
       <h2>Selling a house in {name}: what’s different</h2>
       {isOn ? (

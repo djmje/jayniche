@@ -1,5 +1,6 @@
 import { site, hasPhone } from '../data/site';
 import { cities } from '../data/cities';
+import { ontarioRegions } from '../data/regions';
 
 export const localBusinessSchema = (description: string) => ({
   '@context': 'https://schema.org',
@@ -13,6 +14,11 @@ export const localBusinessSchema = (description: string) => ({
   areaServed: [
     { '@type': 'AdministrativeArea', name: 'Ontario' },
     { '@type': 'AdministrativeArea', name: 'Alberta' },
+    ...ontarioRegions.map((r) => ({
+      '@type': 'Place',
+      name: `${r.name}, Ontario`,
+      containedInPlace: { '@type': 'AdministrativeArea', name: 'Ontario' },
+    })),
     ...cities.map((c) => ({
       '@type': 'City',
       name: c.name.replace(' & the GTA', ''),
