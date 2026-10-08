@@ -11,5 +11,7 @@
     "directory": "./dist",
     "not_found_handling": "404-page"
   },
-  "preview_urls": true
+  "preview_urls": true,
+  // Needed by `wrangler preview`, which Cloudflare uses to build preview links.
+  "previews": {}
 }
