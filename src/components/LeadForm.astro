@@ -111,19 +111,19 @@ const { heading = 'Get your free cash offer', province } = Astro.props;
       button.disabled = true;
 
       try {
-        if (form.dataset.live === 'true') {
-          const response = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { Accept: 'application/json' },
-          });
+        // Send to the CRM (/api/lead) and to Web3Forms (email) at the same time.
+        // The lead counts as received if either one succeeds.
+        const data = new FormData(form);
+        const post = async (url: string) => {
+          const response = await fetch(url, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
           const result = await response.json().catch(() => ({}));
-          if (!response.ok || result.success === false) {
-            throw new Error(`Web3Forms returned ${response.status}: ${result.message ?? ''}`);
-          }
-        } else {
-          console.warn('No Web3Forms key set in src/data/site.ts; this submission was not sent.');
-        }
+          if (!response.ok || result.success === false) throw new Error(`${url} returned ${response.status}`);
+        };
+        const sends = [post('/api/lead')];
+        if (form.dataset.live === 'true') sends.push(post(form.action));
+        const results = await Promise.allSettled(sends);
+        results.filter((r) => r.status === 'rejected').forEach((r) => console.error((r as PromiseRejectedResult).reason));
+        if (!results.some((r) => r.status === 'fulfilled')) throw new Error('Lead could not be sent');
 
         form.hidden = true;
         card.querySelector<HTMLElement>('.form-thanks')!.hidden = false;

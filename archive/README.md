@@ -9,10 +9,10 @@ The "Jayniche" landing page (Hamilton & Niagara positioning), copied from the
 
 ### Where its form sent leads
 
-- **This saved copy** posts to `https://formsubmit.co/azzamx16@gmail.com`
+- **This saved copy** posts to `https://formsubmit.co/[redacted-email]`
   with the subject "New lead from Jayniche website".
 - **The live site** (as of Oct 2026) sends leads through **Web3Forms**, which emails
-  them to readbyjay@gmail.com with the same subject. So the version deployed on
+  them to your Gmail with the same subject. So the version deployed on
   Cloudflare (Worker `white-darkness-0aa3`) is newer than this file.
 
 The new site keeps Web3Forms so leads keep arriving the same way.

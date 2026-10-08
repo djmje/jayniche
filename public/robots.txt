@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /crm
+Disallow: /api/
 
 Sitemap: https://jayniche.ca/sitemap-index.xml

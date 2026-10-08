@@ -77,7 +77,7 @@ Same name, phone and website on every one:
 - [ ] Open your **Instagram bio link** on your phone. It should land on the new page with the form.
 - [ ] Open your **Facebook ad** preview link. Same check.
 - [ ] Open `https://www.jayniche.ca` and `http://jayniche.ca`. Both should go to `https://jayniche.ca`.
-- [ ] Submit the form once with "TEST" as the name. Within a minute, readbyjay@gmail.com should
+- [ ] Submit the form once with "TEST" as the name. Within a minute, your Gmail should
       get "New lead from Jay Home Buyers website" with all fields and `source_page`.
 - [ ] Then delete the old Cloudflare Worker `white-darkness-0aa3`
       (Workers & Pages → white-darkness-0aa3 → Settings → Delete). A copy is saved in `archive/`.

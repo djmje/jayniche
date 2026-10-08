@@ -11,7 +11,8 @@ Every push to GitHub rebuilds the site automatically.
 | City pages (add a city = add an entry) | `src/data/cities.ts` |
 | Situation pages (inherited, tenants, power of sale, …) | `src/data/situations.ts` |
 | Blog posts (add a post = add a `.md` file) | `src/pages/blog/` |
-| www / http redirects on Cloudflare | `worker/index.js` |
+| Redirects, security headers, routing | `worker/index.js` |
+| Private CRM (jayniche.ca/crm) and lead intake | `worker/crm.js`, `worker/lead.js`, `docs/CRM.md` |
 | Where each legal fact comes from | `SOURCES.md` |
 | Your to-do list (Google, directories, reviews, 90-day plan) | `docs/LAUNCH-CHECKLIST.md` |
 | Questions to ask RECO and RECA | `docs/RECO-RECA-checklist.md` |
