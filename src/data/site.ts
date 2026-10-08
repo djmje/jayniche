@@ -20,10 +20,11 @@ export const site = {
     alberta: [] as string[],
   },
 
-  // Where the lead form sends submissions (e.g. a Formspree or Web3Forms URL).
+  // Web3Forms access key: leads are emailed to you, same as the old site.
+  // Find it at https://app.web3forms.com (it's meant to be public, like the old page had it).
   // While empty, the form shows the thank-you message but sends nothing,
   // which is fine for preview builds and never for the live site.
-  formEndpoint: '',
+  web3formsKey: '',
 
   // Tracking IDs. Leave empty until you have them; nothing loads while empty.
   ga4Id: '', // e.g. 'G-XXXXXXXXXX'

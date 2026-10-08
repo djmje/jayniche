@@ -11,11 +11,14 @@ const { heading = 'Get your free cash offer', province } = Astro.props;
 
 <div class="lead-form-card">
   <h2 class="form-heading">{heading}</h2>
-  <p class="form-sub">Takes about a minute. No obligation.</p>
+  <p class="form-sub">Takes about 2 minutes. No cost, no obligation.</p>
 
-  <form class="lead-form" method="POST" action={site.formEndpoint || '#'} data-endpoint={site.formEndpoint}>
+  <form class="lead-form" method="POST" action="https://api.web3forms.com/submit" data-live={site.web3formsKey ? 'true' : 'false'}>
+    <input type="hidden" name="access_key" value={site.web3formsKey} />
+    <input type="hidden" name="subject" value="New lead from Jay Home Buyers website" />
+    <input type="hidden" name="from_name" value="Jay Home Buyers website" />
     <input type="hidden" name="source_page" value={Astro.url.pathname} />
-    <input type="hidden" name="_subject" value="New seller lead: jayniche.ca" />
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
     <label>
       Property address
@@ -103,21 +106,23 @@ const { heading = 'Get your free cash offer', province } = Astro.props;
       const card = form.closest('.lead-form-card')!;
       const error = form.querySelector<HTMLElement>('.form-error')!;
       const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
-      const endpoint = form.dataset.endpoint;
 
       error.hidden = true;
       button.disabled = true;
 
       try {
-        if (endpoint) {
-          const response = await fetch(endpoint, {
+        if (form.dataset.live === 'true') {
+          const response = await fetch(form.action, {
             method: 'POST',
             body: new FormData(form),
             headers: { Accept: 'application/json' },
           });
-          if (!response.ok) throw new Error(`Form endpoint returned ${response.status}`);
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || result.success === false) {
+            throw new Error(`Web3Forms returned ${response.status}: ${result.message ?? ''}`);
+          }
         } else {
-          console.warn('No form endpoint set in src/data/site.ts; this submission was not sent.');
+          console.warn('No Web3Forms key set in src/data/site.ts; this submission was not sent.');
         }
 
         form.hidden = true;

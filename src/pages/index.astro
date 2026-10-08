@@ -9,28 +9,28 @@ const description =
 
 const faqs = [
   {
-    q: 'How do you decide on your offer?',
-    a: 'We look at the property, the repairs it needs, and what similar homes nearby have sold for. A real person reviews every property, and we walk you through how we got to the number.',
+    q: 'Is this a scam, or will I get lowballed?',
+    a: 'No. A real person reviews every property before any offer is made, and we explain how we got to the number. You are never obligated to accept, and there is no cost at any stage.',
+  },
+  {
+    q: 'Do I need to clean up or repair anything first?',
+    a: 'No. We buy houses as-is, including ones that need a lot of work, still have belongings inside, or haven’t been touched in years.',
+  },
+  {
+    q: 'Will I be pressured on the call?',
+    a: 'No. The call is just to understand the property so we can put together a fair number. What you do next is entirely up to you.',
   },
   {
     q: 'Do I have to pay commissions or fees?',
     a: 'No. There are no agent commissions. On homes we buy, we also cover your lawyer fees and the usual closing costs, so the offer you accept is what you walk away with, less anything owing on the property, like your mortgage.',
   },
   {
-    q: 'Do I need to clean or fix anything?',
-    a: 'No. We buy houses as-is. Leave behind what you don’t want and we’ll take care of it.',
-  },
-  {
     q: 'How fast can you close?',
     a: 'You pick the closing date. If you need to move quickly, we work toward that. If you need more time, that works too.',
   },
   {
-    q: 'Am I committed to anything if I fill out the form?',
-    a: 'No. Asking for an offer is free and there is no obligation to accept it.',
-  },
-  {
     q: 'Are you a real estate agent?',
-    a: 'No. We are a private buyer, not a brokerage. We don’t list your home or show it to the public. If selling to us isn’t the best fit for your situation, we’ll tell you, and we can point you to other options.',
+    a: 'No. We are a private buyer, not a brokerage. We don’t list your home or show it to the public. If selling to us isn’t the best fit for your situation, we’ll tell you.',
   },
 ];
 
@@ -103,18 +103,19 @@ const schema = [
   <section class="section">
     <div class="wrap">
       <h2>How it works</h2>
+      <p>You control how far this goes. Fill out the form, have a short call, then decide. No pressure at any point.</p>
       <ol class="steps">
         <li>
           <h3>Tell us about the property</h3>
-          <p>Fill out the short form or give us a call. It takes about a minute.</p>
+          <p>A short form: the address, its condition and your timeline. It takes about two minutes.</p>
         </li>
         <li>
-          <h3>Get a fair cash offer</h3>
-          <p>We review the details, may ask a few questions or arrange a quick visit, then make you a written offer.</p>
+          <h3>A short call</h3>
+          <p>We call to ask a few follow-up questions about the property so we can put together a fair number.</p>
         </li>
         <li>
-          <h3>Pick your closing date</h3>
-          <p>If you accept, the lawyers handle the paperwork and you close on the date that works for you.</p>
+          <h3>Review your cash offer</h3>
+          <p>A real person reviews every property before we come back to you. If you accept, you pick the closing date.</p>
         </li>
       </ol>
     </div>
@@ -123,7 +124,10 @@ const schema = [
   <section class="section alt">
     <div class="wrap">
       <h2>Situations we help with</h2>
-      <p>Most of the people we talk to are dealing with something more complicated than a regular sale.</p>
+      <p>
+        Every property has a story. An inherited house, a rental that’s become more hassle than it’s worth, a place
+        you’re just ready to be done with. The traditional route can take months you may not have or want to spend.
+      </p>
       <ul class="tiles">
         {situations.map((s) => <li>{s}</li>)}
       </ul>

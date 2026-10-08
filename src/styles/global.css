@@ -1,12 +1,13 @@
+/* Palette carried over from the original Jayniche page: sage, sand, brass, cream */
 :root {
-  --green: #14532d;
-  --green-dark: #0f3d21;
-  --accent: #f59e0b;
-  --ink: #1f2937;
-  --muted: #4b5563;
-  --line: #e5e7eb;
-  --bg: #ffffff;
-  --bg-alt: #f6f7f4;
+  --green: #4f6b57; /* sage-deep */
+  --green-dark: #3e5545;
+  --accent: #a9793f; /* brass */
+  --ink: #24272b;
+  --muted: #555a5f;
+  --line: #dcd5c6;
+  --bg: #fbf9f4; /* cream */
+  --bg-alt: #efe9dd; /* sand */
   --radius: 10px;
 }
 
@@ -36,7 +37,7 @@ img { max-width: 100%; height: auto; }
 .skip:focus { left: 16px; top: 8px; background: #fff; padding: 8px; z-index: 10; }
 
 /* Header: sticky so the call button is always one tap away on mobile */
-.site-header { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+.site-header { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; }
 .logo { font-weight: 800; font-size: 1.15rem; color: var(--green); text-decoration: none; }
 
@@ -45,8 +46,8 @@ img { max-width: 100%; height: auto; }
   font-weight: 700; text-decoration: none; text-align: center; border: 2px solid transparent;
   cursor: pointer; font-size: 1rem; font-family: inherit;
 }
-.btn-primary { background: var(--accent); color: #1f1300; }
-.btn-primary:hover { background: #e08e00; }
+.btn-primary { background: var(--green); color: #fff; }
+.btn-primary:hover { background: var(--green-dark); }
 .btn-call { background: var(--green); color: #fff; padding: 0.55em 1em; font-size: 0.95rem; }
 .btn-outline { border-color: var(--green); color: var(--green); background: #fff; margin-left: 8px; }
 .btn-block { width: 100%; }
@@ -91,6 +92,7 @@ img { max-width: 100%; height: auto; }
 .choices { display: flex; gap: 10px; }
 .lead-form .choice { flex: 1; display: flex; align-items: center; gap: 8px; font-weight: 500; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0.55em 0.75em; margin: 0; }
 .consent { font-size: 0.85rem; color: var(--muted); }
+.hp { display: none; }
 .form-error { color: #b91c1c; margin-top: 10px; }
 .form-thanks h3 { color: var(--green); }
 
@@ -99,7 +101,7 @@ img { max-width: 100%; height: auto; }
 .section.alt { background: var(--bg-alt); }
 .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 20px; counter-reset: step; }
 .steps li { counter-increment: step; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
-.steps li::before { content: counter(step); display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--green); color: #fff; font-weight: 800; margin-bottom: 8px; }
+.steps li::before { content: "0" counter(step); display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; margin-bottom: 8px; font-size: 0.85rem; }
 .tiles { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
 .tiles li { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; font-weight: 600; }
 .areas { display: grid; gap: 20px; }
@@ -114,10 +116,11 @@ img { max-width: 100%; height: auto; }
 .faq p { margin: 10px 0 0; }
 
 .cta { background: var(--green); color: #fff; }
+.cta .btn-primary { background: #fff; color: var(--green); }
 .cta a.btn-outline { background: transparent; color: #fff; border-color: #fff; }
 
 /* Footer */
-.site-footer { background: #111827; color: #d1d5db; padding: 36px 0; font-size: 0.95rem; }
+.site-footer { background: var(--ink); color: #d1d5db; padding: 36px 0; font-size: 0.95rem; }
 .site-footer a { color: #fff; }
 .footer-brand { font-weight: 800; color: #fff; font-size: 1.1rem; }
 .disclaimer { font-size: 0.85rem; color: #9ca3af; max-width: 640px; }

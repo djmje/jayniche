@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jayniche — Free Cash Offer for Your House in Hamilton & Niagara Region</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#24272B;
+    --sage:#6E8F76;
+    --sage-deep:#4F6B57;
+    --sand:#EFE9DD;
+    --brass:#A9793F;
+    --cream:#FBF9F4;
+    --slate-light:#DCD5C6;
+    --max: 1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Public Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.08;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+    font-weight:500;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+  img,svg{display:block; max-width:100%;}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(239,233,221,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--slate-light);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; flex-wrap:wrap; gap:10px;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.35rem;
+    letter-spacing:-0.01em;
+  }
+  .logo em{font-style:italic; color:var(--brass);}
+  .header-cta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    text-decoration:none;
+    border:1px solid var(--ink);
+    padding:9px 18px;
+    border-radius:100px;
+    transition:background .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .header-cta:hover{background:var(--ink); color:var(--cream);}
+
+  /* Hero */
+  .hero{
+    padding:76px 0 40px;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .hero > div{text-align:center;}
+  .hero-points{justify-content:center;}
+  .hero h1{
+    font-size:clamp(2.1rem, 4.2vw, 3.15rem);
+    margin-top:14px;
+    font-style:normal;
+    font-variation-settings:'opsz' 40;
+  }
+  .hero h1 .accent{color:var(--sage-deep); font-style:italic;}
+  .hero-sub{
+    font-size:1.08rem;
+    color:#4B4F45;
+    max-width:46ch;
+    margin:20px auto 0;
+  }
+  .hero-points{
+    display:flex; flex-wrap:wrap; gap:10px 22px;
+    margin-top:28px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--sage-deep);
+  }
+  .hero-points span{display:flex; align-items:center; gap:7px;}
+  .hero-points span::before{
+    content:"";
+    width:6px; height:6px; border-radius:50%;
+    background:var(--brass);
+    display:inline-block;
+  }
+  .hero-cta{
+    display:inline-block;
+    margin-top:34px;
+    background:var(--ink);
+    color:var(--cream);
+    text-decoration:none;
+    padding:15px 30px;
+    border-radius:100px;
+    font-weight:600;
+    font-size:0.98rem;
+    transition:transform .15s ease, background .2s ease;
+  }
+  .hero-cta:hover{background:var(--sage-deep); transform:translateY(-1px);}
+
+  .ridge-divider{width:100%; height:auto; display:block;}
+
+  /* Trust strip */
+  .trust{
+    border-top:1px solid var(--slate-light);
+    border-bottom:1px solid var(--slate-light);
+    padding:26px 0;
+  }
+  .trust-inner{
+    display:flex; flex-wrap:wrap; gap:14px 40px;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:#5B5F55;
+  }
+
+  /* Section shared */
+  section{padding:64px 0;}
+  .section-head{max-width:56ch; margin-bottom:44px;}
+  .section-head h2{font-size:clamp(1.6rem, 3vw, 2.15rem); margin-top:10px;}
+  .section-head p{color:#4B4F45; margin-top:14px; font-size:1.02rem;}
+
+  /* Steps */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:0;
+    border-top:1px solid var(--slate-light);
+  }
+  .step{
+    padding:32px 28px 32px 0;
+    border-right:1px solid var(--slate-light);
+  }
+  .step:last-child{border-right:none; padding-right:0;}
+  .step:not(:first-child){padding-left:28px;}
+  .step-num{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:2.4rem;
+    color:var(--brass);
+    line-height:1;
+  }
+  .step h3{
+    font-size:1.15rem;
+    margin-top:16px;
+    font-weight:600;
+  }
+  .step p{color:#4B4F45; margin-top:10px; font-size:0.95rem;}
+
+  /* Empathy band */
+  .empathy{
+    background:var(--ink);
+    color:var(--cream);
+    border-radius:20px;
+    padding:52px 44px;
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:36px;
+    align-items:center;
+  }
+  .empathy .eyebrow{color:#B7CBB9;}
+  .empathy h2{
+    font-size:clamp(1.5rem, 2.6vw, 2rem);
+    color:var(--cream);
+    margin-top:10px;
+  }
+  .empathy p{color:#D8D3C4; margin-top:16px; font-size:1rem; max-width:48ch;}
+  .empathy-quote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    line-height:1.4;
+    color:var(--cream);
+    border-left:2px solid var(--brass);
+    padding-left:22px;
+  }
+  .empathy-quote span{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-style:normal;
+    font-size:0.7rem;
+    color:#B7CBB9;
+    margin-top:14px;
+    letter-spacing:0.05em;
+  }
+
+  /* Form */
+  .form-section{
+    background:var(--cream);
+    border:1px solid var(--slate-light);
+    border-radius:20px;
+    padding:48px;
+  }
+  .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:38px;
+  }
+  .form-intro h2{font-size:clamp(1.5rem, 2.6vw, 1.95rem);}
+  .form-intro p{color:#4B4F45; margin-top:14px; font-size:0.98rem; max-width:38ch;}
+  .form-intro-list{
+    margin-top:26px;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .form-intro-list div{
+    display:flex; gap:10px; align-items:flex-start;
+    font-size:0.92rem; color:#3C3F37;
+  }
+  .form-intro-list div::before{
+    content:"✓";
+    color:var(--sage-deep);
+    font-weight:700;
+    flex-shrink:0;
+  }
+
+  form{display:flex; flex-direction:column; gap:16px;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  label{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:#5B5F55;
+    margin-bottom:6px;
+  }
+  input, select, textarea{
+    width:100%;
+    font-family:'Public Sans', sans-serif;
+    font-size:16px;
+    padding:12px 14px;
+    border:1px solid var(--slate-light);
+    border-radius:10px;
+    background:#fff;
+    color:var(--ink);
+  }
+  input:focus, select:focus, textarea:focus{
+    outline:2px solid var(--sage);
+    outline-offset:1px;
+    border-color:var(--sage);
+  }
+  textarea{resize:vertical; min-height:80px;}
+  .submit-btn{
+    margin-top:6px;
+    background:var(--brass);
+    color:var(--cream);
+    border:none;
+    padding:15px 28px;
+    border-radius:100px;
+    font-weight:600;
+    font-size:0.98rem;
+    cursor:pointer;
+    transition:background .2s ease, transform .15s ease;
+    font-family:'Public Sans', sans-serif;
+  }
+  .submit-btn:hover{background:var(--sage-deep); transform:translateY(-1px);}
+  .form-disclaimer{
+    font-size:0.78rem;
+    color:#7A7E70;
+    margin-top:2px;
+  }
+  .success-msg{
+    display:none;
+    background:var(--sage);
+    color:#fff;
+    padding:18px 20px;
+    border-radius:12px;
+    font-size:0.95rem;
+  }
+  .success-msg.show{display:block;}
+  form.hidden{display:none;}
+  .form-error{
+    display:none;
+    background:#F7E3DE; color:#8A3A1F;
+    padding:12px 16px; border-radius:10px;
+    font-size:0.85rem; margin-top:4px;
+  }
+  .form-error.show{display:block;}
+  .submit-btn:disabled{opacity:0.6; cursor:not-allowed;}
+  .success-msg{
+    display:none;
+    background:var(--sage);
+    color:#fff;
+    padding:24px;
+    border-radius:12px;
+    font-size:1.05rem;
+    text-align:center;
+  }
+  .success-msg.show{display:block;}
+  form.hidden{display:none;}
+
+  /* FAQ */
+  .faq-item{
+    border-top:1px solid var(--slate-light);
+    padding:22px 0;
+  }
+  .faq-item:last-child{border-bottom:1px solid var(--slate-light);}
+  .faq-item h3{
+    font-size:1.02rem;
+    font-weight:600;
+    font-family:'Public Sans', sans-serif;
+  }
+  .faq-item p{color:#4B4F45; margin-top:10px; font-size:0.95rem; max-width:60ch;}
+
+  footer{
+    padding:40px 0 50px;
+    border-top:1px solid var(--slate-light);
+    display:flex; flex-direction:column; align-items:flex-start;
+    gap:12px;
+  }
+  footer .logo{font-size:1.1rem;}
+  footer p{
+    font-size:0.78rem;
+    color:#7A7E70;
+    max-width:44ch;
+  }
+
+  @media (max-width: 760px){
+    .hero{grid-template-columns:1fr; padding-top:52px;}
+    .steps{grid-template-columns:1fr;}
+    .step{border-right:none; border-bottom:1px solid var(--slate-light); padding:26px 0;}
+    .step:not(:first-child){padding-left:0;}
+    .empathy{grid-template-columns:1fr; padding:36px 26px; border-radius:16px;}
+    .form-section{padding:28px; border-radius:16px;}
+    .form-grid{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">jay<em>niche</em></div>
+    <a href="#form" class="header-cta">Get my cash offer</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-bottom:0;">
+    <div>
+      <h1>Looking for a free cash offer? Tell us a bit more.</h1>
+      <p class="hero-sub">No repairs, no showings, no agent fees, and no closing costs — we'll even cover your lawyer fees. Tell us a little about the property and we'll give you a fair, no-obligation cash offer.</p>
+      <a href="#form" class="hero-cta">Tell us about the property →</a>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="section-head">
+      <div class="eyebrow">How it works</div>
+      <h2>Three steps, at your pace</h2>
+      <p>You control how far this goes. Fill out the form, have a short call, then decide — no pressure to move forward at any point.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Tell us about the property</h3>
+        <p>A short form — the address, its condition, and your timeline. Takes about two minutes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>A short qualifying call</h3>
+        <p>We'll call to ask a few follow-up questions about the property so we can put together a fair number.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Review your cash offer</h3>
+        <p>We personally review every call before reaching back out — no obligation to accept.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMPATHY BAND -->
+  <section>
+    <div class="empathy">
+      <div>
+        <div class="eyebrow">Whatever the reason</div>
+        <h2>Every property has a story.</h2>
+        <p>An inherited house, a rental that's become more hassle than it's worth, a place you're just ready to be done with — the traditional route can take months you may not have or want to spend. We built Jayniche around getting you a real number, fast, no matter the reason.</p>
+      </div>
+      <div class="empathy-quote">
+        "You don't need to fix it up, list it, or manage showings. Just tell us where things stand, and we'll take it from there."
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section id="form">
+    <div class="form-section">
+      <div class="form-grid">
+        <div class="form-intro">
+          <div class="eyebrow">Start here</div>
+          <h2>Get your no-obligation cash offer</h2>
+          <p>Fill this out and we'll follow up with a short call to confirm the details — usually within one business day.</p>
+          <div class="form-intro-list">
+            <div>Takes about 2 minutes</div>
+            <div>No cost, no obligation to move forward</div>
+            <div>We'll never share your information</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="success-msg" id="successMsg">Thank you, a team member will reach out to you as soon as possible.</div>
+          <form id="leadForm" action="https://formsubmit.co/azzamx16@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New lead from Jayniche website">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <div>
+              <label for="address">Property address</label>
+              <input type="text" id="address" name="address" placeholder="Street address, Hamilton or Niagara Region" required>
+            </div>
+            <div class="field-row">
+              <div>
+                <label for="beds">Bedrooms</label>
+                <select id="beds" name="beds" required>
+                  <option value="" disabled selected>Select one</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5+</option>
+                </select>
+              </div>
+              <div>
+                <label for="baths">Bathrooms</label>
+                <select id="baths" name="baths" required>
+                  <option value="" disabled selected>Select one</option>
+                  <option>1</option>
+                  <option>1.5</option>
+                  <option>2</option>
+                  <option>2.5</option>
+                  <option>3+</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="timeline">Ideal timeline</label>
+              <select id="timeline" name="timeline" required>
+                <option value="" disabled selected>Select one</option>
+                <option>As soon as possible</option>
+                <option>1–3 months</option>
+                <option>3–6 months</option>
+                <option>Just exploring options</option>
+              </select>
+            </div>
+            <div class="field-row">
+              <div>
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div>
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(905) 000-0000" required>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn">Get my cash offer</button>
+            <p class="form-disclaimer">By submitting, you agree to be contacted by phone or text about your property. No spam, no third parties.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">Why Jayniche</div>
+      <h2>A real, local operation — not a call center.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">→</div>
+        <h3>Every offer reviewed personally</h3>
+        <p>No algorithm decides your number. A real person looks at every property before you hear back.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">→</div>
+        <h3>Local to Hamilton &amp; Niagara</h3>
+        <p>Not a national franchise passing your info around — one local buyer, start to finish.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">→</div>
+        <h3>No pressure, ever</h3>
+        <p>You'll get a number and the space to decide. Walking away costs you nothing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-head">
+      <div class="eyebrow">Common questions</div>
+      <h2>Before you reach out</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Is this a scam, or will I get lowballed?</h3>
+        <p>No — every submission is personally reviewed before any offer is made. You're never obligated to accept, and there's no cost or pressure at any stage.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do I need to clean up or repair anything first?</h3>
+        <p>No. We buy properties as-is, including ones that need significant work, have belongings still inside, or haven't been touched in years.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Will I be pressured on the call?</h3>
+        <p>No. The call is just to understand the property better so we can put together a fair number. Deciding what to do next is entirely up to you.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="logo">jay<em>niche</em></div>
+  <p>Jayniche is a cash home buyer serving Hamilton and the Niagara Region. We buy houses for cash, as-is, any condition. No repairs. No hassle. Just sold.</p>
+</footer>
+
+<script>
+  const leadForm = document.getElementById('leadForm');
+  const successMsg = document.getElementById('successMsg');
+
+  if(new URLSearchParams(window.location.search).get('submitted') === 'true'){
+    leadForm.classList.add('hidden');
+    successMsg.classList.add('show');
+    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+
+  leadForm.addEventListener('submit', function(){
+    const submitBtn = leadForm.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+  });
+</script>
+
+</body>
+</html>
