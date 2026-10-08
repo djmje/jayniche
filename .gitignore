@@ -6,3 +6,4 @@ dist/
 .wrangler/
 crm/data/
 crm/config.json
+__pycache__/
