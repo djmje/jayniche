@@ -1,0 +1,25 @@
+---
+// Situations where the approach is the same in both provinces.
+import ContentPage from '../../layouts/ContentPage.astro';
+import SituationBody from '../../components/SituationBody.astro';
+import { situations, type Situation } from '../../data/situations';
+
+export function getStaticPaths() {
+  return situations
+    .filter((s) => !s.province)
+    .map((s) => ({ params: { slug: s.path.split('/')[2] }, props: { s } }));
+}
+
+const { s } = Astro.props as { s: Situation };
+---
+
+<ContentPage
+  title={s.title}
+  description={s.description}
+  h1={s.h1}
+  intro={s.intro}
+  crumbs={[{ name: 'Home', path: '/' }, { name: s.label, path: s.path }]}
+  faqs={s.faqs}
+>
+  <SituationBody s={s} />
+</ContentPage>

@@ -1,0 +1,57 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+
+const faqs = [
+  { q: 'How long does it take to get an offer?', a: 'Usually within a few business days of our call, sometimes sooner. It depends on whether we need to see the property.' },
+  { q: 'Do you need to see the house?', a: 'Often, yes, a short visit or a video walkthrough helps us make a fair offer. We set it up at a time that suits you, and with proper notice if there are tenants.' },
+  { q: 'Who handles the paperwork?', a: 'Real estate lawyers on both sides. You pick your own lawyer, and on homes we buy we cover your lawyer fees.' },
+];
+---
+
+<ContentPage
+  title="How Selling Your House to Us Works | Jay Home Buyers"
+  description="How our cash offer process works, step by step: a short form, a quick call, a written offer reviewed by a real person, and a closing date you choose."
+  h1="How selling your house to us works"
+  intro="Three steps, at your pace. You control how far this goes, and there’s no pressure to move forward at any point."
+  crumbs={[{ name: 'Home', path: '/' }, { name: 'How it works', path: '/how-it-works/' }]}
+  faqs={faqs}
+>
+  <section class="section">
+    <div class="wrap">
+      <ol class="steps">
+        <li>
+          <h3>Tell us about the property</h3>
+          <p>A short form: the address, its condition, whether it’s listed, who lives there and your timeline. It takes about two minutes.</p>
+        </li>
+        <li>
+          <h3>A short call</h3>
+          <p>We call to ask a few follow-up questions so we can put together a fair number. If needed, we arrange a quick visit or video walkthrough.</p>
+        </li>
+        <li>
+          <h3>Review your cash offer</h3>
+          <p>A real person reviews every property before we come back to you with a written offer. If you accept, you pick the closing date.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap prose">
+      <h2>What happens after you accept</h2>
+      <p>We sign a written agreement of purchase and sale. Your lawyer and ours handle the title search, the mortgage payout and the transfer. On closing day the funds go to your lawyer, who pays off anything owing on the property and sends you the rest.</p>
+
+      <h2>What it costs you</h2>
+      <ul>
+        <li>No agent commission</li>
+        <li>No repairs, cleaning or staging</li>
+        <li>We cover your lawyer fees on homes we buy</li>
+        <li>Anything owing on the property, like your mortgage or property taxes, is paid out of the sale price, as with any sale</li>
+      </ul>
+
+      <h2>Cash offer vs. listing with a realtor</h2>
+      <p>Listing can get a higher price for a house in good shape, if you have the time and money for repairs, showings and commission. Selling to us is usually faster and simpler, and makes the most sense when the house needs work or your situation is complicated. We’ll be honest about which is better for you. Read more in <a href="/blog/cash-buyer-vs-realtor/">Cash buyer vs. listing with a realtor</a>.</p>
+
+      <h2>When we might not be the right fit</h2>
+      <p>If your house is a newer build in great shape, or it’s already listed with an agent, a traditional sale is usually the better route. If buying the house ourselves doesn’t make sense, we’ll tell you, and with your permission we can point you to a licensed realtor.</p>
+    </div>
+  </section>
+</ContentPage>

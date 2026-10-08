@@ -1,0 +1,25 @@
+---
+import ContentPage from '../../layouts/ContentPage.astro';
+
+const posts = Object.values(import.meta.glob('./*.md', { eager: true }) as Record<string, any>)
+  .sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date));
+---
+
+<ContentPage
+  title="Home Seller Guides for Ontario & Alberta | Blog"
+  description="Plain-language guides for homeowners in Ontario and Alberta: probate, tenants, power of sale, foreclosure, repairs and selling for cash."
+  h1="Guides for home sellers"
+  intro="Plain answers to the questions sellers in Ontario and Alberta ask us most."
+  crumbs={[{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog/' }]}
+>
+  <section class="section">
+    <div class="wrap prose">
+      {posts.map((p) => (
+        <article>
+          <h2><a href={p.url.endsWith('/') ? p.url : p.url + '/'}>{p.frontmatter.title}</a></h2>
+          <p>{p.frontmatter.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</ContentPage>

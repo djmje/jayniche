@@ -1,0 +1,21 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+import { site, hasPhone } from '../data/site';
+---
+
+<ContentPage
+  title="Contact Jay Home Buyers | Ontario & Alberta"
+  description="Get in touch with Jay Home Buyers about selling your house in Ontario or Alberta. Fill out the short form and a real person will reach out, usually within a business day."
+  h1="Contact us"
+  intro="The fastest way to reach us is the short form below. A real person will get back to you, usually within one business day."
+  crumbs={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact/' }]}
+>
+  <section class="section">
+    <div class="wrap prose">
+      {hasPhone && <p><strong>Phone or text:</strong> <a href={`tel:${site.phoneE164}`}>{site.phoneDisplay}</a></p>}
+      {site.email && <p><strong>Email:</strong> <a href={`mailto:${site.email}`}>{site.email}</a></p>}
+      <p><strong>Instagram:</strong> <a href={site.instagram} rel="noopener">@jayhomebuyers</a></p>
+      <p><strong>Service area:</strong> Ontario and Alberta. We meet sellers at the property, so we don’t list a public office address.</p>
+    </div>
+  </section>
+</ContentPage>

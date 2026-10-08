@@ -1,0 +1,33 @@
+---
+import ContentPage from './ContentPage.astro';
+
+const { frontmatter } = Astro.props;
+const { title, seoTitle, description, date, province } = frontmatter;
+const path = Astro.url.pathname;
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: date,
+  author: { '@type': 'Organization', name: 'Jay Home Buyers' },
+  publisher: { '@type': 'Organization', name: 'Jay Home Buyers' },
+};
+---
+
+<ContentPage
+  title={seoTitle}
+  description={description}
+  h1={title}
+  crumbs={[{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog/' }, { name: title, path }]}
+  province={province}
+  schema={[article]}
+>
+  <section class="section">
+    <article class="wrap prose">
+      <p class="post-meta">Published {new Date(date).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</p>
+      <slot />
+      <p class="note">This article is general information, not legal advice. Rules change, so check with a lawyer about your situation.</p>
+    </article>
+  </section>
+</ContentPage>

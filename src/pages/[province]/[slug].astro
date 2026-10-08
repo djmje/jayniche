@@ -1,0 +1,95 @@
+---
+// City pages (/ontario/ottawa/) and province-specific situation pages (/ontario/power-of-sale/).
+import ContentPage from '../../layouts/ContentPage.astro';
+import SituationBody from '../../components/SituationBody.astro';
+import { cities, type City } from '../../data/cities';
+import { situations, situationByKey, type Situation } from '../../data/situations';
+
+export function getStaticPaths() {
+  const cityPaths = cities.map((c) => ({
+    params: { province: c.province, slug: c.slug },
+    props: { city: c },
+  }));
+  const situationPaths = situations
+    .filter((s) => s.province)
+    .map((s) => ({
+      params: { province: s.province!, slug: s.path.split('/')[2] },
+      props: { situation: s },
+    }));
+  return [...cityPaths, ...situationPaths];
+}
+
+const { city, situation } = Astro.props as { city?: City; situation?: Situation };
+const province = Astro.params.province as 'ontario' | 'alberta';
+const provinceName = province === 'ontario' ? 'Ontario' : 'Alberta';
+const crumbsBase = [{ name: 'Home', path: '/' }, { name: provinceName, path: `/${province}/` }];
+
+const cityFaqs = city && [
+  {
+    q: `How fast can you buy my house in ${city.name}?`,
+    a: 'You choose the closing date. If you need to move quickly we work toward that, and if you need more time, that works too.',
+  },
+  {
+    q: `Do you buy houses in the areas around ${city.name}?`,
+    a: `Yes. Along with ${city.neighbourhoods.slice(0, 3).join(', ')} and the rest of ${city.name}, we buy in nearby towns and rural areas.`,
+  },
+  {
+    q: 'Do I need to fix anything or clean up first?',
+    a: 'No. We buy as-is. Leave behind what you don’t want and we’ll take care of it.',
+  },
+];
+---
+
+{city && (
+  <ContentPage
+    title={city.title}
+    description={city.description}
+    h1={`Sell your house fast in ${city.name}`}
+    intro={city.intro}
+    crumbs={[...crumbsBase, { name: city.name, path: `/${province}/${city.slug}/` }]}
+    faqs={cityFaqs}
+    province={provinceName}
+    ctaHeading={`Get a cash offer for your ${city.name} house`}
+  >
+    <section class="section">
+      <div class="wrap prose">
+        <h2>Neighbourhoods we buy in</h2>
+        <ul class="tags">{city.neighbourhoods.map((n) => <li>{n}</li>)}</ul>
+
+        <h2>{city.name}’s housing, and the problems we see</h2>
+        {city.housing.map((p) => <p>{p}</p>)}
+
+        <h2>Selling in {city.name}</h2>
+        {city.local.map((p) => <p>{p}</p>)}
+
+        <h2>How it works</h2>
+        <ol>
+          <li><strong>Tell us about the property</strong> with the short form or a call.</li>
+          <li><strong>Have a short call</strong> so we can understand the house and your situation.</li>
+          <li><strong>Get a fair cash offer</strong> reviewed by a real person. If you accept, you pick the closing date.</li>
+        </ol>
+        <p><a href="/how-it-works/">More on how it works</a></p>
+
+        <h2>Situations we help with in {city.name}</h2>
+        <ul class="link-grid">
+          {city.situations.map(situationByKey).map((s) => <li><a href={s.path}>{s.label}</a></li>)}
+        </ul>
+        <p>See all the places we buy in <a href={`/${province}/`}>{provinceName}</a>.</p>
+      </div>
+    </section>
+  </ContentPage>
+)}
+
+{situation && (
+  <ContentPage
+    title={situation.title}
+    description={situation.description}
+    h1={situation.h1}
+    intro={situation.intro}
+    crumbs={[...crumbsBase, { name: situation.label.replace(/ \((Ontario|Alberta)\)/, ''), path: situation.path }]}
+    faqs={situation.faqs}
+    province={provinceName}
+  >
+    <SituationBody s={situation} />
+  </ContentPage>
+)}

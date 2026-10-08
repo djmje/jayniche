@@ -7,14 +7,28 @@ Every push to GitHub rebuilds the site automatically.
 
 | What | File |
 | --- | --- |
-| Phone, email, cities, form endpoint, tracking IDs | `src/data/site.ts` |
+| Phone, email, Web3Forms key, GA4 / Meta Pixel / Search Console IDs | `src/data/site.ts` |
+| City pages (add a city = add an entry) | `src/data/cities.ts` |
+| Situation pages (inherited, tenants, power of sale, …) | `src/data/situations.ts` |
+| Blog posts (add a post = add a `.md` file) | `src/pages/blog/` |
+| www / http redirects on Cloudflare | `worker/index.js` |
+| Where each legal fact comes from | `SOURCES.md` |
+| Your to-do list (Google, directories, reviews, 90-day plan) | `docs/LAUNCH-CHECKLIST.md` |
+| Questions to ask RECO and RECA | `docs/RECO-RECA-checklist.md` |
 | Header, footer, SEO tags, GA4 and Meta Pixel | `src/layouts/Base.astro` |
 | Lead form | `src/components/LeadForm.astro` |
 | Pages (each file = one URL) | `src/pages/` |
 | Colours and layout | `src/styles/global.css` |
 | Copy of the old jayniche.ca site | `archive/` |
 
-## Cloudflare Pages build settings
+## How it deploys
+
+Cloudflare Workers Builds (Worker name `jayniche`) watches this GitHub repo.
+
+- Push to **`main`** → goes live on https://jayniche.ca (and www redirects to it).
+- Push to any other branch → gets a preview link (Cloudflare → Workers & Pages → jayniche → Previews).
+
+## Old Cloudflare Pages notes (not used)
 
 In Cloudflare: **Workers & Pages → your project → Settings → Build**.
 

@@ -1,0 +1,38 @@
+---
+import type { Situation } from '../data/situations';
+import { situationByKey } from '../data/situations';
+import { citiesIn } from '../data/cities';
+
+interface Props { s: Situation }
+const { s } = Astro.props;
+const related = s.related.map(situationByKey);
+const provinces = s.province ? [s.province] : (['ontario', 'alberta'] as const);
+---
+
+<section class="section">
+  <div class="wrap prose">
+    {s.sections.map((sec) => (
+      <>
+        <h2>{sec.h2}</h2>
+        {sec.paragraphs?.map((p) => <p>{p}</p>)}
+        {sec.list && <ul>{sec.list.map((li) => <li>{li}</li>)}</ul>}
+      </>
+    ))}
+    <p class="note">
+      This page is general information, not legal advice. Rules change, so check with a lawyer about your situation.
+    </p>
+
+    <h2>Related situations</h2>
+    <ul class="link-grid">
+      {related.map((r) => <li><a href={r.path}>{r.label}</a></li>)}
+    </ul>
+
+    <h2>Where we buy</h2>
+    {provinces.map((p) => (
+      <p>
+        <a href={`/${p}/`}><strong>{p === 'ontario' ? 'Ontario' : 'Alberta'}</strong></a>:{' '}
+        {citiesIn(p).map((c, i) => <>{i > 0 && ', '}<a href={`/${p}/${c.slug}/`}>{c.name}</a></>)}, and the areas around them.
+      </p>
+    ))}
+  </div>
+</section>

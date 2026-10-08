@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import LeadForm from '../components/LeadForm.astro';
 import { site, hasPhone } from '../data/site';
+import { citiesIn } from '../data/cities';
+import { localBusinessSchema, faqSchema } from '../lib/schema';
 
 const title = 'We Buy Houses in Ontario & Alberta | Jay Home Buyers';
 const description =
@@ -35,40 +37,17 @@ const faqs = [
 ];
 
 const situations = [
-  'Inherited or estate property',
-  'House needs major repairs, or has fire or water damage',
-  'Tenant-occupied rental',
-  'Behind on mortgage payments',
-  'Power of sale (Ontario) or foreclosure (Alberta)',
-  'Divorce or separation',
-  'Downsizing or relocating',
+  { label: 'Inherited or estate property', links: [['Ontario', '/ontario/inherited-house/'], ['Alberta', '/alberta/inherited-house/']] },
+  { label: 'House needs major repairs, or has fire or water damage', href: '/situations/house-needs-repairs/' },
+  { label: 'Tenant-occupied rental', links: [['Ontario', '/ontario/sell-house-with-tenants/'], ['Alberta', '/alberta/sell-house-with-tenants/']] },
+  { label: 'Behind on mortgage payments', href: '/situations/behind-on-mortgage/' },
+  { label: 'Power of sale (Ontario) or foreclosure (Alberta)', links: [['Power of sale', '/ontario/power-of-sale/'], ['Foreclosure', '/alberta/foreclosure/']] },
+  { label: 'Divorce or separation', href: '/situations/divorce/' },
+  { label: 'Downsizing', href: '/situations/downsizing/' },
+  { label: 'Relocating for work or family', href: '/situations/relocating/' },
 ];
 
-const schema = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: site.name,
-    url: site.url,
-    description,
-    ...(hasPhone && { telephone: site.phoneE164 }),
-    ...(site.email && { email: site.email }),
-    areaServed: [
-      { '@type': 'AdministrativeArea', name: 'Ontario' },
-      { '@type': 'AdministrativeArea', name: 'Alberta' },
-    ],
-    sameAs: [site.instagram],
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  },
-];
+const schema = [localBusinessSchema(description), faqSchema(faqs)];
 ---
 
 <Base title={title} description={description} schema={schema}>
@@ -129,7 +108,16 @@ const schema = [
         you’re just ready to be done with. The traditional route can take months you may not have or want to spend.
       </p>
       <ul class="tiles">
-        {situations.map((s) => <li>{s}</li>)}
+        {situations.map((s) => (
+          <li>
+            {s.href ? <a href={s.href}>{s.label}</a> : (
+              <>
+                {s.label}
+                <span class="tile-links">{s.links!.map(([t, h]) => <a href={h}>{t}</a>)}</span>
+              </>
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   </section>
@@ -140,12 +128,12 @@ const schema = [
       <p>We buy houses across Ontario and Alberta, in cities, towns and rural areas.</p>
       <div class="areas">
         <div>
-          <h3>Ontario</h3>
-          {site.cities.ontario.length > 0 && <p>{site.cities.ontario.join(' · ')}</p>}
+          <h3><a href="/ontario/">Ontario</a></h3>
+          <ul class="link-grid">{citiesIn('ontario').map((c) => <li><a href={`/ontario/${c.slug}/`}>{c.name}</a></li>)}</ul>
         </div>
         <div>
-          <h3>Alberta</h3>
-          {site.cities.alberta.length > 0 && <p>{site.cities.alberta.join(' · ')}</p>}
+          <h3><a href="/alberta/">Alberta</a></h3>
+          <ul class="link-grid">{citiesIn('alberta').map((c) => <li><a href={`/alberta/${c.slug}/`}>{c.name}</a></li>)}</ul>
         </div>
       </div>
     </div>

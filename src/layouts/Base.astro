@@ -1,5 +1,7 @@
 ---
 import { site, hasPhone } from '../data/site';
+import { citiesIn } from '../data/cities';
+import { situations } from '../data/situations';
 import '../styles/global.css';
 
 interface Props {
@@ -72,10 +74,17 @@ const ogImageUrl = new URL(ogImage, site.url).href;
     <header class="site-header">
       <div class="wrap header-inner">
         <a class="logo" href="/">{site.name}</a>
+        <nav class="main-nav" aria-label="Main">
+          <a href="/ontario/">Ontario</a>
+          <a href="/alberta/">Alberta</a>
+          <a href="/how-it-works/">How it works</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/about/">About</a>
+        </nav>
         {hasPhone ? (
           <a class="btn btn-call" href={`tel:${site.phoneE164}`}>Call {site.phoneDisplay}</a>
         ) : (
-          <a class="btn btn-call" href="/#form">Get my offer</a>
+          <a class="btn btn-call" href="#form">Get my offer</a>
         )}
       </div>
     </header>
@@ -86,6 +95,30 @@ const ogImageUrl = new URL(ogImage, site.url).href;
 
     <footer class="site-footer">
       <div class="wrap">
+        <div class="footer-cols">
+          <div>
+            <p class="footer-head">Ontario</p>
+            <a href="/ontario/">All of Ontario</a>
+            {citiesIn('ontario').map((c) => <a href={`/ontario/${c.slug}/`}>{c.name}</a>)}
+          </div>
+          <div>
+            <p class="footer-head">Alberta</p>
+            <a href="/alberta/">All of Alberta</a>
+            {citiesIn('alberta').map((c) => <a href={`/alberta/${c.slug}/`}>{c.name}</a>)}
+          </div>
+          <div>
+            <p class="footer-head">Situations</p>
+            {situations.map((s) => <a href={s.path}>{s.label}</a>)}
+          </div>
+          <div>
+            <p class="footer-head">Company</p>
+            <a href="/how-it-works/">How it works</a>
+            <a href="/about/">About</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/blog/">Blog</a>
+            <a href="/contact/">Contact</a>
+          </div>
+        </div>
         <p class="footer-brand">{site.name}</p>
         <p>We buy houses for cash in Ontario and Alberta.</p>
         {hasPhone && (

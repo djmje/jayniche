@@ -1,0 +1,28 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+
+const faqs = [
+  { q: 'Is this a scam, or will I get lowballed?', a: 'No. A real person reviews every property before any offer is made, and we explain how we got to the number. You are never obligated to accept, and there is no cost at any stage.' },
+  { q: 'How do you decide on your offer?', a: 'We look at the property’s condition, the repairs it needs, what similar homes nearby have sold for, and the costs of holding and reselling it. A cash offer is usually below what a fully renovated, listed house would sell for, because we take on the repairs, the risk and the time.' },
+  { q: 'Do I need to clean up or repair anything first?', a: 'No. We buy properties as-is, including ones that need significant work, have belongings still inside, or haven’t been touched in years.' },
+  { q: 'Do I have to pay commissions or fees?', a: 'No agent commission. On homes we buy, we also cover your lawyer fees and the usual closing costs. Anything owing on the property, like your mortgage, is paid from the sale price, as with any sale.' },
+  { q: 'How fast can you close?', a: 'You pick the closing date. If you need to move quickly, we work toward that. If you need more time, that works too.' },
+  { q: 'Will I be pressured on the call?', a: 'No. The call is just to understand the property so we can put together a fair number. What you do next is entirely up to you.' },
+  { q: 'Do you buy houses with tenants?', a: 'Yes. We can buy with tenants in place and take over the lease, in both Ontario and Alberta.' },
+  { q: 'Can you buy a house that’s in an estate?', a: 'Yes. We can agree on terms early and close once the estate has its court certificate (Ontario) or grant (Alberta).' },
+  { q: 'My house is already listed. Can I sell to you?', a: 'If you have a listing agreement with a brokerage, you need to sort that out with your agent first. In most cases, a listed house isn’t a fit for us.' },
+  { q: 'Are you a real estate agent?', a: 'No. We are a private buyer, not a brokerage. We don’t list your home or show it to the public. If selling to us isn’t the best fit, we’ll tell you.' },
+  { q: 'Where do you buy?', a: 'Across Ontario and Alberta, including Toronto and the GTA, Ottawa, London, Kitchener-Waterloo, Windsor, Sudbury, Calgary, Edmonton, Red Deer, Lethbridge and the towns around them.' },
+  { q: 'What happens to my information?', a: 'We use it only to contact you about your property. We never sell it. See our privacy policy for details.' },
+];
+---
+
+<ContentPage
+  title="FAQ: Selling Your House for Cash | Jay Home Buyers"
+  description="Answers to common questions about selling your house for cash in Ontario and Alberta: offers, fees, timelines, tenants, estates and how we work."
+  h1="Frequently asked questions"
+  intro="Straight answers about how selling to us works. Don’t see your question? Fill out the form and ask us."
+  crumbs={[{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq/' }]}
+  faqs={faqs}
+>
+</ContentPage>

@@ -1,0 +1,45 @@
+---
+// Layout for every page except the home page: breadcrumbs, a hero with the H1,
+// the page content, optional FAQs, then the lead form.
+import Base from './Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Faq from '../components/Faq.astro';
+import CtaForm from '../components/CtaForm.astro';
+import { faqSchema, breadcrumbSchema } from '../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  intro?: string;
+  crumbs: { name: string; path: string }[];
+  faqs?: { q: string; a: string }[];
+  province?: 'Ontario' | 'Alberta';
+  ctaHeading?: string;
+  schema?: object[];
+  ogType?: string;
+}
+
+const { title, description, h1, intro, crumbs, faqs = [], province, ctaHeading, schema = [] } = Astro.props;
+const allSchema = [
+  breadcrumbSchema(crumbs),
+  ...(faqs.length ? [faqSchema(faqs)] : []),
+  ...schema,
+];
+---
+
+<Base title={title} description={description} schema={allSchema}>
+  <Breadcrumbs items={crumbs} />
+  <section class="page-hero">
+    <div class="wrap narrow">
+      <h1>{h1}</h1>
+      {intro && <p class="lead">{intro}</p>}
+      <p><a class="btn btn-primary" href="#form">Get my cash offer</a></p>
+    </div>
+  </section>
+  <div class="prose-wrap">
+    <slot />
+  </div>
+  {faqs.length > 0 && <Faq faqs={faqs} />}
+  <CtaForm province={province} heading={ctaHeading} />
+</Base>

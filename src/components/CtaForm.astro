@@ -1,0 +1,34 @@
+---
+// The call to action that ends every page: the lead form, plus a call button when a phone is set.
+import LeadForm from './LeadForm.astro';
+import { site, hasPhone } from '../data/site';
+
+interface Props {
+  heading?: string;
+  text?: string;
+  province?: 'Ontario' | 'Alberta';
+}
+const {
+  heading = 'Get your free cash offer',
+  text = 'Tell us a little about the property. A real person reviews every one, and there’s no obligation.',
+  province,
+} = Astro.props;
+---
+
+<section class="section cta-form">
+  <div class="wrap cta-grid">
+    <div>
+      <h2>{heading}</h2>
+      <p>{text}</p>
+      <ul class="checks">
+        <li>No repairs, cleanup or showings</li>
+        <li>No commissions, and we cover your lawyer fees</li>
+        <li>You pick the closing date</li>
+      </ul>
+      {hasPhone && <p><a class="btn btn-primary" href={`tel:${site.phoneE164}`}>Call {site.phoneDisplay}</a></p>}
+    </div>
+    <div id="form" class="form-anchor">
+      <LeadForm heading="Request your offer" province={province} />
+    </div>
+  </div>
+</section>
