@@ -4,3 +4,5 @@ dist/
 .DS_Store
 .env
 .wrangler/
+crm/data/
+crm/config.json

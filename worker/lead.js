@@ -1,4 +1,4 @@
-// POST /api/lead: saves a website form submission to the CRM database.
+// POST /api/lead: saves a website form submission to the drop box for the laptop CRM.
 import { clip, clientIp, json, rateLimit, sameOrigin } from './lib.js';
 
 // Scores a lead against the "good lead" profile: needs work, not listed,

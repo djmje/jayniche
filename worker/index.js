@@ -1,10 +1,10 @@
 // Runs in front of the static site on Cloudflare.
 // - Sends www.jayniche.ca and plain http to https://jayniche.ca
-// - /api/lead saves form submissions to the CRM database
-// - /crm is the private, password-protected CRM
+// - /api/lead saves form submissions to a drop box until the laptop CRM pulls them
+// - /api/inbox is how the laptop CRM (crm/jaycrm.py) pulls them, with a secret key
 // - Adds security headers to every page
 import { handleLead } from './lead.js';
-import { handleCrm } from './crm.js';
+import { handleInbox } from './inbox.js';
 
 const SECURITY_HEADERS = {
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
@@ -31,7 +31,7 @@ export default {
 
     let response;
     if (url.pathname === '/api/lead') response = await handleLead(request, env);
-    else if (url.pathname === '/crm' || url.pathname.startsWith('/crm/')) response = await handleCrm(request, env, url);
+    else if (url.pathname === '/api/inbox' || url.pathname === '/api/inbox/ack') response = await handleInbox(request, env, url);
     else response = await env.ASSETS.fetch(request);
     return withSecurityHeaders(response);
   },

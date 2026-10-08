@@ -1,4 +1,6 @@
--- CRM schema for the jayniche-crm D1 database.
+-- Schema for the jayniche-crm D1 database: the website's lead drop box.
+-- Leads wait here until the laptop CRM (crm/jaycrm.py) downloads and deletes them.
+-- The notes, sessions and password columns are left over from the old online CRM and unused.
 -- Applied once; add new numbered files for later changes.
 
 CREATE TABLE IF NOT EXISTS leads (

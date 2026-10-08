@@ -12,7 +12,8 @@ Every push to GitHub rebuilds the site automatically.
 | Situation pages (inherited, tenants, power of sale, …) | `src/data/situations.ts` |
 | Blog posts (add a post = add a `.md` file) | `src/pages/blog/` |
 | Redirects, security headers, routing | `worker/index.js` |
-| Private CRM (jayniche.ca/crm) and lead intake | `worker/crm.js`, `worker/lead.js`, `docs/CRM.md` |
+| Laptop CRM (runs on your computer) | `crm/jaycrm.py`, setup in `crm/README.md` |
+| Lead drop box the laptop CRM pulls from | `worker/lead.js`, `worker/inbox.js` |
 | Where each legal fact comes from | `SOURCES.md` |
 | Your to-do list (Google, directories, reviews, 90-day plan) | `docs/LAUNCH-CHECKLIST.md` |
 | Questions to ask RECO and RECA | `docs/RECO-RECA-checklist.md` |
