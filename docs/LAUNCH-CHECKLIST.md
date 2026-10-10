@@ -12,7 +12,6 @@ phone number, and https://jayniche.ca.
 
 - [ ] Business phone (turns on the tap-to-call buttons and adds it to Google's business info)
 - [ ] Business email (shown on Contact and in the footer)
-- [ ] Your photo for the About page
 - [ ] Meta Pixel ID: Facebook **Events Manager** → **Data sources** → your Pixel/dataset → copy
       the ID (a long number). Put it in `metaPixelId`. The site then sends a **Lead** event every
       time the form is submitted, so you can build a retargeting audience and optimize ads for leads.
@@ -86,7 +85,7 @@ Same name, phone and website on every one:
 
 > Hi [Name], thanks again for trusting us with [address]. If you were happy with how it went,
 > would you mind leaving a short Google review? It really helps other homeowners find us:
-> [your Google review link]. No pressure at all. Thanks! – Jay, Jay Home Buyers
+> [your Google review link]. No pressure at all. Thanks! – Jay Home Buyers
 
 (Get your review link in Google Business Profile → **Ask for reviews**. Only ask real sellers,
 never offer anything in exchange, and never write reviews yourself.)
@@ -115,5 +114,5 @@ never offer anything in exchange, and never write reviews yourself.)
 | 11 | City page: Medicine Hat or Grande Prairie |
 | 12 | Blog: a real (anonymized, with permission) story from a deal you closed |
 
-**Monthly:** ask every happy seller for a review, and add one real photo (you, a property, a
-handshake) to the About page or Google Business Profile.
+**Monthly:** ask every happy seller for a review, and add a real property photo (before/after,
+with the seller's permission) to your Google Business Profile.
