@@ -1,10 +1,12 @@
 // Runs in front of the static site on Cloudflare.
 // - Sends www.jayniche.ca and plain http to https://jayniche.ca
 // - /api/lead saves form submissions to a drop box until the laptop CRM pulls them
+// - /api/twilio/* runs the business phone line (calls, texts, missed-call text-back)
 // - /api/inbox is how the laptop CRM (crm/jaycrm.py) pulls them, with a secret key
 // - Adds security headers to every page
 import { handleLead } from './lead.js';
 import { handleInbox } from './inbox.js';
+import { handleTwilio } from './twilio.js';
 
 const SECURITY_HEADERS = {
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
@@ -21,7 +23,7 @@ function withSecurityHeaders(response) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.hostname === 'www.jayniche.ca' || (url.protocol === 'http:' && url.hostname === 'jayniche.ca')) {
       url.hostname = 'jayniche.ca';
@@ -30,7 +32,8 @@ export default {
     }
 
     let response;
-    if (url.pathname === '/api/lead') response = await handleLead(request, env);
+    if (url.pathname === '/api/lead') response = await handleLead(request, env, ctx);
+    else if (url.pathname.startsWith('/api/twilio/')) response = await handleTwilio(request, env, ctx, url);
     else if (url.pathname === '/api/inbox' || url.pathname === '/api/inbox/ack') response = await handleInbox(request, env, url);
     else response = await env.ASSETS.fetch(request);
     return withSecurityHeaders(response);

@@ -14,6 +14,7 @@ Every push to GitHub rebuilds the site automatically.
 | Redirects, security headers, routing | `worker/index.js` |
 | Laptop CRM (runs on your computer) | `crm/jaycrm.py`, setup in `crm/README.md` |
 | Lead drop box the laptop CRM pulls from | `worker/lead.js`, `worker/inbox.js` |
+| Business phone line: instant lead texts, call forwarding, missed-call text-back (setup steps at the top of the file) | `worker/twilio.js` |
 | Where each legal fact comes from | `SOURCES.md` |
 | Your to-do list (Google, directories, reviews, 90-day plan) | `docs/LAUNCH-CHECKLIST.md` |
 | Questions to ask RECO and RECA | `docs/RECO-RECA-checklist.md` |

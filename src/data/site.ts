@@ -6,8 +6,8 @@ export const site = {
   url: 'https://jayniche.ca',
 
   // Phone in two formats: what people see, and what their phone dials.
-  phoneDisplay: '', // e.g. '(905) 555-0123'
-  phoneE164: '', // e.g. '+19055550123'
+  phoneDisplay: '(289) 672-1952', // business line (Twilio), forwards to Jay's cell
+  phoneE164: '+12896721952',
   email: '',
 
   instagram: 'https://www.instagram.com/jayhomebuyers/',

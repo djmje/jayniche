@@ -1,5 +1,7 @@
-// POST /api/lead: saves a website form submission to the drop box for the laptop CRM.
+// POST /api/lead: saves a website form submission to the drop box for the laptop CRM,
+// then texts the lead and Jay through the business line (worker/twilio.js).
 import { clip, clientIp, json, rateLimit, sameOrigin } from './lib.js';
+import { onNewLead } from './twilio.js';
 
 // Scores a lead against the "good lead" profile: needs work, not listed,
 // motivated timeline. Listed homes are usually not a fit.
@@ -13,7 +15,7 @@ export function scoreLead({ condition, listed, occupancy, timeline }) {
   return { score, priority };
 }
 
-export async function handleLead(request, env) {
+export async function handleLead(request, env, ctx) {
   if (request.method !== 'POST') return json({ success: false, message: 'Method not allowed' }, 405);
   if (!sameOrigin(request)) return json({ success: false, message: 'Forbidden' }, 403);
 
@@ -53,6 +55,9 @@ export async function handleLead(request, env) {
   )
     .bind(lead.source_page, lead.name, lead.phone, lead.address, lead.province, lead.condition, lead.listed, lead.occupancy, lead.timeline, score, priority)
     .run();
+
+  // Text the lead and Jay in the background (skipped until the Twilio settings are filled in).
+  ctx.waitUntil(onNewLead(env, lead, priority).catch((err) => console.error('lead texts failed', err)));
 
   return json({ success: true });
 }
