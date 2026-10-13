@@ -8,7 +8,8 @@
 // the leads_retrieval permission is enough for your own page.
 //
 // Settings (Cloudflare -> jayniche -> Settings -> Variables and Secrets):
-//   FB_PAGE_TOKEN  (secret)  long-lived Page access token for the Jay Home Buyers page
+//   FB_PAGE_TOKEN  (secret)  a never-expiring System User token from Business Settings (or a
+//                            Page token). A System User token is swapped for the Page's token here.
 // Missing token = this does nothing.
 
 import { onNewLead, sendSms, twilioReady } from './twilio.js';
@@ -17,10 +18,10 @@ const PAGE_ID = '1347840598405260'; // Jay Home Buyers Facebook page
 const GRAPH = 'https://graph.facebook.com/v23.0';
 const OVERLAP = 600; // seconds re-checked each run; duplicates are skipped
 
-async function graph(env, path, params = {}) {
+async function graph(env, path, params = {}, token = env.FB_PAGE_TOKEN) {
   const url = new URL(`${GRAPH}/${path}`);
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
-  url.searchParams.set('access_token', env.FB_PAGE_TOKEN);
+  url.searchParams.set('access_token', token);
   const res = await fetch(url);
   const body = await res.json().catch(() => ({}));
   if (!res.ok || body.error) {
@@ -79,13 +80,23 @@ export async function pollFacebookLeads(env) {
 
   try {
     const since = last - OVERLAP;
-    const forms = await graph(env, `${PAGE_ID}/leadgen_forms`, { fields: 'id,status', limit: '100' });
+    // Lead endpoints want the Page's own token. If FB_PAGE_TOKEN is a System User or user token,
+    // ask for the Page token with it; if it's already a Page token this just fails and we use it as is.
+    const pageToken = await graph(env, PAGE_ID, { fields: 'access_token' })
+      .then((r) => r.access_token || env.FB_PAGE_TOKEN)
+      .catch(() => env.FB_PAGE_TOKEN);
+    const forms = await graph(env, `${PAGE_ID}/leadgen_forms`, { fields: 'id,status', limit: '100' }, pageToken);
     for (const form of forms.data || []) {
-      const leads = await graph(env, `${form.id}/leads`, {
-        fields: 'id,created_time,field_data',
-        limit: '100',
-        filtering: JSON.stringify([{ field: 'time_created', operator: 'GREATER_THAN', value: since }]),
-      });
+      const leads = await graph(
+        env,
+        `${form.id}/leads`,
+        {
+          fields: 'id,created_time,field_data',
+          limit: '100',
+          filtering: JSON.stringify([{ field: 'time_created', operator: 'GREATER_THAN', value: since }]),
+        },
+        pageToken,
+      );
       for (const fbLead of leads.data || []) {
         const seenKey = `fb_lead:${fbLead.id}`;
         if (await getSetting(env, seenKey)) continue;
