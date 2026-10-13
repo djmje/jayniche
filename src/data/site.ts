@@ -27,7 +27,7 @@ export const site = {
   web3formsKey: '3183735a-4270-4554-aec0-be3b317b118e',
 
   // Tracking IDs. Leave empty until you have them; nothing loads while empty.
-  ga4Id: '', // e.g. 'G-XXXXXXXXXX'
+  ga4Id: 'G-CQQ4T04EG5', // GA4 property "jayniche.ca" (Jay Home Buyers account)
   metaPixelId: '1849401976049470', // "Jay Home Buyers" dataset in Meta Events Manager
   googleSiteVerification: '', // the content="..." value from Search Console
 };

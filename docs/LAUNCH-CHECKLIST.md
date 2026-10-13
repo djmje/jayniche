@@ -10,13 +10,13 @@ phone number, and https://jayniche.ca.
 
 ## 1. Fill in your details on the site (5 min, tell Claude or edit `src/data/site.ts`)
 
-- [ ] Business phone (turns on the tap-to-call buttons and adds it to Google's business info)
-- [ ] Business email (shown on Contact and in the footer)
-- [ ] Meta Pixel ID: Facebook **Events Manager** → **Data sources** → your Pixel/dataset → copy
+- [x] Business phone (turns on the tap-to-call buttons and adds it to Google's business info)
+- [x] Business email (shown on Contact and in the footer)
+- [x] Meta Pixel ID: Facebook **Events Manager** → **Data sources** → your Pixel/dataset → copy
       the ID (a long number). Put it in `metaPixelId`. The site then sends a **Lead** event every
       time the form is submitted, so you can build a retargeting audience and optimize ads for leads.
 
-## 2. Google Search Console (15 min)
+## 2. Google Search Console (15 min) ✅ done Oct 12 (HTML file verification, sitemap submitted)
 
 1. Go to https://search.google.com/search-console and click **Add property**.
 2. Choose **Domain** and type `jayniche.ca`.
@@ -30,7 +30,7 @@ phone number, and https://jayniche.ca.
 (Alternative: Search Console's **URL prefix** option gives an HTML tag. Put its `content="..."`
 value in `googleSiteVerification` in `src/data/site.ts`.)
 
-## 3. Google Analytics 4 (10 min)
+## 3. Google Analytics 4 (10 min) ✅ property created Oct 13, ID G-CQQ4T04EG5 (step 4 still to do once data arrives)
 
 1. https://analytics.google.com → **Admin → Create → Property**, name it "Jay Home Buyers", time zone Toronto (or Edmonton).
 2. Choose **Web**, enter `https://jayniche.ca`.
