@@ -6,8 +6,9 @@ export const site = {
   url: 'https://jayniche.ca',
 
   // Phone in two formats: what people see, and what their phone dials.
-  phoneDisplay: '(289) 672-1952', // business line (Twilio), forwards to Jay's cell
-  phoneE164: '+12896721952',
+  // No business phone line right now; leave both empty to hide every phone link.
+  phoneDisplay: '',
+  phoneE164: '',
   email: 'readbyjay@gmail.com',
 
   instagram: 'https://www.instagram.com/jayhomebuyers/',

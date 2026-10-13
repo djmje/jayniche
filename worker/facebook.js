@@ -1,8 +1,7 @@
-// Facebook lead ads -> same instant text as website leads.
+// Facebook lead ads -> the same CRM drop box as website leads.
 //
 // Every 2 minutes (cron in wrangler.jsonc) this checks the Jay Home Buyers page's lead forms
-// for new leads. Each new lead is saved to the CRM drop box (source "facebook") and gets the
-// auto-text + Jay's alert from worker/twilio.js.
+// for new leads. Each new lead is saved to the CRM drop box (source "facebook").
 //
 // Polling instead of a Meta webhook means no Meta app review is needed: a Page token with
 // the leads_retrieval permission is enough for your own page.
@@ -11,8 +10,6 @@
 //   FB_PAGE_TOKEN  (secret)  a never-expiring System User token from Business Settings (or a
 //                            Page token). A System User token is swapped for the Page's token here.
 // Missing token = this does nothing.
-
-import { onNewLead, sendSms, twilioReady } from './twilio.js';
 
 const PAGE_ID = '1347840598405260'; // Jay Home Buyers Facebook page
 const GRAPH = 'https://graph.facebook.com/v23.0';
@@ -108,7 +105,6 @@ export async function pollFacebookLeads(env) {
         )
           .bind(`facebook form ${form.id}`, lead.name, lead.phone, lead.email, lead.address, lead.motivation)
           .run();
-        await onNewLead(env, lead, 'Warm');
       }
     }
     await setSetting(env, 'fb_last_poll', now);
@@ -116,13 +112,5 @@ export async function pollFacebookLeads(env) {
     await env.DB.prepare("DELETE FROM settings WHERE key LIKE 'fb_lead:%' AND CAST(value AS INTEGER) < ?").bind(now - 7 * 86400).run();
   } catch (err) {
     console.error('facebook poll failed', err);
-    // Code 190 = token expired or revoked. Tell Jay once a day.
-    if (err.code === 190 && twilioReady(env)) {
-      const warned = Number((await getSetting(env, 'fb_token_warned')) || 0);
-      if (now - warned > 86400) {
-        await setSetting(env, 'fb_token_warned', now);
-        await sendSms(env, env.OWNER_CELL, 'Facebook lead texts paused: the Facebook token stopped working. Ask Claude to make a new one.').catch(() => {});
-      }
-    }
   }
 }
