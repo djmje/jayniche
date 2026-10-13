@@ -24,8 +24,13 @@ const ogImageUrl = new URL(ogImage, site.url).href;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#4f6b57" />
+    <!-- Logo icons: browser tab, Google search results (needs 48px+), and phone home screens. -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon-96.png" type="image/png" sizes="96x96" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#23262b" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />

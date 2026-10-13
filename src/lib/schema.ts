@@ -8,6 +8,7 @@ export const localBusinessSchema = (description: string) => ({
   name: site.name,
   url: site.url,
   image: `${site.url}/og-image.png`,
+  logo: `${site.url}/icon-512.png`,
   description,
   ...(hasPhone && { telephone: site.phoneE164 }),
   ...(site.email && { email: site.email }),
