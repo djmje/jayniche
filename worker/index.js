@@ -3,10 +3,12 @@
 // - /api/lead saves form submissions to a drop box until the laptop CRM pulls them
 // - /api/twilio/* runs the business phone line (calls, texts, missed-call text-back)
 // - /api/inbox is how the laptop CRM (crm/jaycrm.py) pulls them, with a secret key
+// - Every 2 minutes, pulls new Facebook lead ad leads and texts them (worker/facebook.js)
 // - Adds security headers to every page
 import { handleLead } from './lead.js';
 import { handleInbox } from './inbox.js';
 import { handleTwilio } from './twilio.js';
+import { pollFacebookLeads } from './facebook.js';
 
 const SECURITY_HEADERS = {
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
@@ -37,5 +39,10 @@ export default {
     else if (url.pathname === '/api/inbox' || url.pathname === '/api/inbox/ack') response = await handleInbox(request, env, url);
     else response = await env.ASSETS.fetch(request);
     return withSecurityHeaders(response);
+  },
+
+  // Cron (wrangler.jsonc "triggers"): new Facebook lead ad leads.
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(pollFacebookLeads(env));
   },
 };

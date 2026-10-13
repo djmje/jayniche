@@ -24,6 +24,8 @@
     { "pattern": "jayniche.ca", "custom_domain": true },
     { "pattern": "www.jayniche.ca", "custom_domain": true }
   ],
+  // Every 2 minutes: check Facebook lead forms for new leads (worker/facebook.js).
+  "triggers": { "crons": ["*/2 * * * *"] },
   "preview_urls": true,
   // Needed by `wrangler preview`, which Cloudflare uses to build preview links.
   "previews": {}

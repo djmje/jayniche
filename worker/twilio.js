@@ -99,7 +99,7 @@ export async function onNewLead(env, lead, priority) {
       sendSms(
         env,
         to,
-        `Hi ${firstName(lead.name)}, it's Jay from Jay Home Buyers. Got your info on ${shortAddress(lead.address)}. When's a good time for a quick 5 min call? ${SIGN_OFF}`,
+        `Hi ${firstName(lead.name)}, it's Jay from Jay Home Buyers. Got your info on ${shortAddress(lead.address) || 'your property'}. When's a good time for a quick 5 min call? ${SIGN_OFF}`,
       ),
     );
   }
@@ -107,7 +107,7 @@ export async function onNewLead(env, lead, priority) {
     sendSms(
       env,
       env.OWNER_CELL,
-      `New lead (${priority}): ${ascii(lead.name).slice(0, 40)}, ${to ? pretty(to) : ascii(lead.phone)}, ${shortAddress(lead.address)}. ${to ? 'Auto-text sent.' : 'Phone looks wrong, no auto-text.'}`,
+      `New ${lead.source === 'facebook' ? 'FB ' : ''}lead (${priority}): ${ascii(lead.name).slice(0, 40)}, ${to ? pretty(to) : ascii(lead.phone)}, ${shortAddress(lead.address) || 'no address'}. ${to ? 'Auto-text sent.' : 'Phone looks wrong, no auto-text.'}`,
     ),
   );
   const results = await Promise.allSettled(jobs);
