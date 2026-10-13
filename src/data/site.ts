@@ -8,7 +8,7 @@ export const site = {
   // Phone in two formats: what people see, and what their phone dials.
   phoneDisplay: '(289) 672-1952', // business line (Twilio), forwards to Jay's cell
   phoneE164: '+12896721952',
-  email: '',
+  email: 'readbyjay@gmail.com',
 
   instagram: 'https://www.instagram.com/jayhomebuyers/',
 
@@ -28,7 +28,7 @@ export const site = {
 
   // Tracking IDs. Leave empty until you have them; nothing loads while empty.
   ga4Id: '', // e.g. 'G-XXXXXXXXXX'
-  metaPixelId: '', // e.g. '123456789012345'
+  metaPixelId: '1849401976049470', // "Jay Home Buyers" dataset in Meta Events Manager
   googleSiteVerification: '', // the content="..." value from Search Console
 };
 
