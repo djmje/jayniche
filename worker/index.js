@@ -31,6 +31,11 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
+    // The old Hamilton landing page was folded into the Hamilton city page.
+    if (url.pathname === '/we-buy-houses-hamilton' || url.pathname === '/we-buy-houses-hamilton/') {
+      return Response.redirect(`https://jayniche.ca/ontario/hamilton/${url.search}`, 301);
+    }
+
     let response;
     if (url.pathname === '/api/lead') response = await handleLead(request, env, ctx);
     else if (url.pathname === '/api/inbox' || url.pathname === '/api/inbox/ack') response = await handleInbox(request, env, url);
