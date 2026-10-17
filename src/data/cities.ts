@@ -40,22 +40,6 @@ const cityData: Omit<City, 'description'>[] = [
     situations: ['ontario-inherited', 'ontario-tenants', 'repairs', 'ontario-power-of-sale'],
   },
   {
-    slug: 'hamilton',
-    name: 'Hamilton',
-    province: 'ontario',
-    custom: true, // page lives in src/pages/ontario/hamilton.astro
-    title: 'Sell Your House Fast in Hamilton, ON | We Buy Houses As-Is',
-    intro: 'We buy houses in Hamilton in any condition, for cash.',
-    neighbourhoods: [
-      'Downtown', 'Corktown', 'Durand', 'Kirkendall', 'Strathcona', 'Beasley', 'Gibson', 'Landsdale', 'Crown Point',
-      'Stipeley', 'Barton Village', 'Westdale', 'Ainslie Wood', 'Hamilton Mountain', 'Stoney Creek', 'Ancaster',
-      'Dundas', 'Waterdown', 'Flamborough', 'Glanbrook', 'Binbrook',
-    ],
-    housing: [],
-    local: [],
-    situations: ['ontario-inherited', 'repairs', 'ontario-tenants', 'ontario-power-of-sale'],
-  },
-  {
     slug: 'ottawa',
     name: 'Ottawa',
     province: 'ontario',

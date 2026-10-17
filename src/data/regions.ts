@@ -6,7 +6,7 @@ export interface Region {
   id: string;
   name: string;
   blurb: string;
-  cities: { name: string; slug?: string }[];
+  cities: { name: string; slug?: string; href?: string }[];
 }
 
 export const ontarioRegions: Region[] = [
@@ -27,7 +27,7 @@ export const ontarioRegions: Region[] = [
     name: 'Hamilton & Niagara',
     blurb: 'Hamilton and the Niagara Region.',
     cities: [
-      { name: 'Hamilton', slug: 'hamilton' }, { name: 'St. Catharines' }, { name: 'Niagara Falls' }, { name: 'Welland' }, { name: 'Fort Erie' },
+      { name: 'Hamilton', href: '/we-buy-houses-hamilton/' }, { name: 'St. Catharines' }, { name: 'Niagara Falls' }, { name: 'Welland' }, { name: 'Fort Erie' },
     ],
   },
   {

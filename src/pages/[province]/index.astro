@@ -57,7 +57,10 @@ const faqs = isOn
                 <h3>{r.name}</h3>
                 <p class="region-blurb">{r.blurb}</p>
                 <ul class="tags">
-                  {r.cities.map((c) => <li class={c.slug ? 'linked' : undefined}>{c.slug ? <a href={`/ontario/${c.slug}/`}>{c.name}</a> : c.name}</li>)}
+                  {r.cities.map((c) => {
+                    const href = c.href ?? (c.slug ? `/ontario/${c.slug}/` : null);
+                    return <li class={href ? 'linked' : undefined}>{href ? <a href={href}>{c.name}</a> : c.name}</li>;
+                  })}
                 </ul>
               </div>
             ))}

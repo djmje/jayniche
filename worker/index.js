@@ -31,9 +31,9 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
-    // The old Hamilton landing page was folded into the Hamilton city page.
-    if (url.pathname === '/we-buy-houses-hamilton' || url.pathname === '/we-buy-houses-hamilton/') {
-      return Response.redirect(`https://jayniche.ca/ontario/hamilton/${url.search}`, 301);
+    // There's one Hamilton page: /we-buy-houses-hamilton/. Send the old /ontario/hamilton/ URL there.
+    if (url.pathname === '/ontario/hamilton' || url.pathname === '/ontario/hamilton/') {
+      return Response.redirect(`https://jayniche.ca/we-buy-houses-hamilton/${url.search}`, 301);
     }
 
     let response;
