@@ -11,7 +11,7 @@ export const localBusinessSchema = (description: string) => ({
   logo: `${site.url}/icon-512.png`,
   description,
   ...(hasPhone && { telephone: site.phoneE164 }),
-  ...(site.email && { email: site.email }),
+  ...(site.googleEmail && { email: site.googleEmail }),
   areaServed: [
     { '@type': 'AdministrativeArea', name: 'Ontario' },
     { '@type': 'AdministrativeArea', name: 'Alberta' },

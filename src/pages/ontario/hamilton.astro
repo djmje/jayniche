@@ -62,7 +62,7 @@ const schema = [
     image: `${site.url}/og-image.png`,
     description,
     ...(hasPhone && { telephone: site.phoneE164 }),
-    ...(site.email && { email: site.email }),
+    ...(site.googleEmail && { email: site.googleEmail }),
     areaServed: areas.map((name) => ({ '@type': 'City', name })),
   },
   faqSchema(faqs),

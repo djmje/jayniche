@@ -9,7 +9,9 @@ export const site = {
   // No business phone line right now; leave both empty to hide every phone link.
   phoneDisplay: '',
   phoneE164: '',
-  email: '', // keep empty: no email address shown anywhere on the site
+  email: '', // shown on the site (footer, Contact page). Keep empty: no public email.
+  // Only in the hidden business info (schema) Google reads, never shown on a page.
+  googleEmail: 'readbyjay@gmail.com',
 
   instagram: 'https://www.instagram.com/jayhomebuyers/',
 
