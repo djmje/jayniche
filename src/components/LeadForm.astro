@@ -6,14 +6,15 @@ interface Props {
   province?: 'Ontario' | 'Alberta'; // preselects the province on province/city pages
   buttonText?: string;
   note?: string; // small line shown under the form
+  sub?: string; // line under the form heading
 }
 
-const { heading = 'Get your free cash offer', province, buttonText = 'Get my cash offer', note } = Astro.props;
+const { heading = 'Get your free cash offer', province, buttonText = 'Get my cash offer', note, sub = 'Takes about 2 minutes. No cost, no obligation.' } = Astro.props;
 ---
 
 <div class="lead-form-card">
   <h2 class="form-heading">{heading}</h2>
-  <p class="form-sub">Takes about 2 minutes. No cost, no obligation.</p>
+  <p class="form-sub">{sub}</p>
 
   <form class="lead-form" method="POST" action="https://api.web3forms.com/submit" data-live={site.web3formsKey ? 'true' : 'false'}>
     <input type="hidden" name="access_key" value={site.web3formsKey} />

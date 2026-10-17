@@ -16,6 +16,7 @@ const title = city.title;
 const description = city.description;
 const button = 'Get My Cash Offer';
 const formNote = 'No obligation. We never share or sell your information.';
+const formSub = 'Takes about a minute. No cost, no obligation.';
 const areas = ['Hamilton', 'Stoney Creek', 'Ancaster', 'Dundas', 'Waterdown', 'Flamborough', 'Glanbrook', 'Binbrook'];
 
 const faqs = [
@@ -70,7 +71,7 @@ const schema = [
 ];
 ---
 
-<Base title={title} description={description} schema={schema}>
+<Base title={title} description={description} schema={schema} headerCta={button}>
   <Breadcrumbs items={crumbs} />
 
   <section class="hero">
@@ -83,7 +84,7 @@ const schema = [
         </ul>
       </div>
       <div id="form" class="hero-form">
-        <LeadForm province="Ontario" buttonText={button} note={formNote} />
+        <LeadForm province="Ontario" buttonText={button} note={formNote} sub={formSub} />
       </div>
     </div>
   </section>
@@ -121,7 +122,7 @@ const schema = [
         <p>Tell us a little about the property. A real person reviews every one, and there’s no obligation.</p>
       </div>
       <div id="form-2" class="form-anchor">
-        <LeadForm heading="Request your offer" province="Ontario" buttonText={button} note={formNote} />
+        <LeadForm heading="Request your offer" province="Ontario" buttonText={button} note={formNote} sub={formSub} />
       </div>
     </div>
   </section>
@@ -157,7 +158,7 @@ const schema = [
   <section class="section cta-form">
     <div class="wrap narrow">
       <div id="form-3" class="form-anchor">
-        <LeadForm heading="Request your offer" province="Ontario" buttonText={button} note={formNote} />
+        <LeadForm heading="Request your offer" province="Ontario" buttonText={button} note={formNote} sub={formSub} />
       </div>
     </div>
   </section>
