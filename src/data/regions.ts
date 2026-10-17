@@ -27,7 +27,7 @@ export const ontarioRegions: Region[] = [
     name: 'Hamilton & Niagara',
     blurb: 'Hamilton and the Niagara Region.',
     cities: [
-      { name: 'Hamilton' }, { name: 'St. Catharines' }, { name: 'Niagara Falls' }, { name: 'Welland' }, { name: 'Fort Erie' },
+      { name: 'Hamilton', slug: 'hamilton' }, { name: 'St. Catharines' }, { name: 'Niagara Falls' }, { name: 'Welland' }, { name: 'Fort Erie' },
     ],
   },
   {

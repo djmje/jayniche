@@ -132,10 +132,12 @@ const ogImageUrl = new URL(ogImage, site.url).href;
         {site.email && (
           <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
         )}
-        <p class="disclaimer">
-          {site.name} is a private home buyer, not a real estate brokerage, and does not
-          list or market homes for sale on behalf of sellers.
-        </p>
+        <div data-nosnippet>
+          <p class="disclaimer">
+            {site.name} is a private home buyer, not a real estate brokerage, and does not
+            list or market homes for sale on behalf of sellers.
+          </p>
+        </div>
         <p class="footer-links">
           <a href="/privacy/">Privacy policy</a>
           <a href={site.instagram} rel="noopener">Instagram</a>

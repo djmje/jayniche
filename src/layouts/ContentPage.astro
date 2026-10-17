@@ -5,6 +5,7 @@ import Base from './Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Faq from '../components/Faq.astro';
 import CtaForm from '../components/CtaForm.astro';
+import SmallPrint from '../components/SmallPrint.astro';
 import { faqSchema, breadcrumbSchema } from '../lib/schema';
 
 interface Props {
@@ -18,9 +19,10 @@ interface Props {
   ctaHeading?: string;
   schema?: object[];
   ogType?: string;
+  smallPrint?: boolean; // show the offer/legal small print above the footer
 }
 
-const { title, description, h1, intro, crumbs, faqs = [], province, ctaHeading, schema = [] } = Astro.props;
+const { title, description, h1, intro, crumbs, faqs = [], province, ctaHeading, schema = [], smallPrint = false } = Astro.props;
 const allSchema = [
   breadcrumbSchema(crumbs),
   ...(faqs.length ? [faqSchema(faqs)] : []),
@@ -42,4 +44,5 @@ const allSchema = [
   </div>
   {faqs.length > 0 && <Faq faqs={faqs} />}
   <CtaForm province={province} heading={ctaHeading} />
+  {smallPrint && <SmallPrint />}
 </Base>

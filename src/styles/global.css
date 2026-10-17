@@ -181,3 +181,22 @@ img { max-width: 100%; height: auto; }
 @media (min-width: 900px) { .regions { grid-template-columns: 1fr 1fr; } }
 .prose ul.tags, .prose ul.link-grid { padding-left: 0; }
 #regions { scroll-margin-top: 72px; }
+
+/* Comparison table, badges, small print */
+.compare-wrap { overflow-x: auto; margin: 0 0 1.5em; }
+.compare { width: 100%; min-width: 520px; border-collapse: collapse; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); }
+.compare th, .compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 0.95rem; }
+.compare thead th { background: var(--bg-alt); font-size: 0.9rem; }
+.compare thead th:nth-child(2), .compare td:nth-child(2) { background: #f1f6f2; font-weight: 600; }
+.compare tbody th { font-weight: 700; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.badges { list-style: none; padding: 0; margin: 0 0 1em; display: flex; flex-wrap: wrap; gap: 8px; }
+.badges li { background: #fff; border: 1px solid var(--green); color: var(--green); border-radius: 999px; padding: 4px 12px; font-weight: 700; font-size: 0.9rem; }
+.form-note { font-size: 0.85rem; color: var(--muted); text-align: center; margin: 10px 0 0; }
+.small-print { background: var(--bg-alt); border-top: 1px solid var(--line); padding: 18px 0; font-size: 0.85rem; color: var(--muted); }
+.small-print p { margin: 0; max-width: 760px; }
+.cta-band { background: var(--green); color: #fff; padding: 40px 0; text-align: center; }
+.cta-band h2 { color: #fff; }
+.cta-band .btn-primary { background: #fff; color: var(--green); }
+.city-link { margin-top: 16px; font-weight: 700; }
+.hero-intro .badges { margin-top: 14px; }

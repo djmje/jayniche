@@ -5,9 +5,9 @@ import { site, hasPhone } from '../data/site';
 import { citiesIn } from '../data/cities';
 import { localBusinessSchema, faqSchema } from '../lib/schema';
 
-const title = 'We Buy Houses in Ontario & Alberta | Jay Home Buyers';
+const title = 'We Buy Houses for Cash in Ontario & Alberta | Sell As-Is, Fast';
 const description =
-  'Sell your house as-is in Ontario or Alberta. No repairs, no showings, no agent fees. Get a fair cash offer and pick your own closing date.';
+  'Get a fair cash offer on your house. We buy as-is: no repairs, no showings, no agent commissions. Pick your closing date. Ontario & Alberta.';
 
 const faqs = [
   {
@@ -130,7 +130,8 @@ const schema = [localBusinessSchema(description), faqSchema(faqs)];
         <div>
           <h3><a href="/ontario/">Ontario</a></h3>
           <ul class="link-grid">{citiesIn('ontario').map((c) => <li><a href={`/ontario/${c.slug}/`}>{c.name}</a></li>)}</ul>
-          <p class="more-areas">Plus Hamilton &amp; Niagara, Waterloo Region, Central Ontario, Kingston, Thunder Bay and the rest of the province. <a href="/ontario/#regions">See all Ontario regions</a></p>
+          <p class="city-link"><a href="/we-buy-houses-hamilton/">Selling in Hamilton? →</a></p>
+          <p class="more-areas">Plus Niagara, Waterloo Region, Central Ontario, Kingston, Thunder Bay and the rest of the province. <a href="/ontario/#regions">See all Ontario regions</a></p>
         </div>
         <div>
           <h3><a href="/alberta/">Alberta</a></h3>

@@ -1,0 +1,23 @@
+---
+// "Selling to us vs. listing with an agent" comparison, used on city pages.
+const rows = [
+  ['Commission', 'None', 'Typically a percentage of the sale price, plus HST'],
+  ['Repairs', 'None, sold as-is', 'Usually expected before listing or negotiated after inspection'],
+  ['Showings', 'None', 'Often weekly until it sells'],
+  ['Buyer financing', 'No bank approval to wait on', 'Deal can fall through if financing fails'],
+  ['Closing date', 'You choose', 'Set by the buyer’s offer'],
+  ['Certainty', 'One offer, no conditions on showings', 'Depends on market and buyer'],
+];
+---
+
+<h2>Selling to us vs. listing with an agent</h2>
+<div class="compare-wrap">
+  <table class="compare">
+    <thead><tr><th scope="col"><span class="sr-only">Compare</span></th><th scope="col">Selling to us</th><th scope="col">Listing with an agent</th></tr></thead>
+    <tbody>
+      {rows.map(([label, us, agent]) => (
+        <tr><th scope="row">{label}</th><td>{us}</td><td>{agent}</td></tr>
+      ))}
+    </tbody>
+  </table>
+</div>

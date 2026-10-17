@@ -1,0 +1,166 @@
+---
+// Hand-built city page for Hamilton (the other city pages use src/pages/[province]/[slug].astro).
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import CompareTable from '../../components/CompareTable.astro';
+import Faq from '../../components/Faq.astro';
+import SmallPrint from '../../components/SmallPrint.astro';
+import { site, hasPhone } from '../../data/site';
+import { faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { cities } from '../../data/cities';
+
+const city = cities.find((c) => c.slug === 'hamilton')!;
+const path = '/ontario/hamilton/';
+const title = city.title;
+const description = city.description;
+const button = 'Get My Cash Offer';
+const formNote = 'No obligation. We never share or sell your information.';
+const areas = ['Hamilton', 'Stoney Creek', 'Ancaster', 'Dundas', 'Waterdown', 'Flamborough', 'Glanbrook', 'Binbrook'];
+
+const faqs = [
+  { q: 'Do I need to fix or clean anything?', a: 'No. We buy as-is. Leave behind what you don’t want.' },
+  { q: 'Are there fees or commissions?', a: 'No agent commissions. We’ll walk you through all costs before you agree to anything.' },
+  { q: 'How fast can we close?', a: 'You choose the date. Some sellers want weeks, others want a few months. We work around your timeline.' },
+  { q: 'How do you come up with the offer?', a: 'We look at what the house would sell for once repaired, subtract the cost of the repairs it needs and our costs, and explain the numbers to you.' },
+  { q: 'Can you buy if I’m facing power of sale?', a: 'Often, yes. The sooner you reach out, the more options there are. The mortgage and arrears are paid from the sale at closing.' },
+  { q: 'Can you buy a house with tenants in it?', a: 'Yes. We can buy with tenants in place.' },
+  { q: 'Are you a real estate agent?', a: 'No. We’re a private buyer, not a brokerage. We don’t list your home; we make an offer on it ourselves.' },
+  { q: 'Is there any obligation?', a: 'None. If the offer doesn’t work for you, you walk away.' },
+];
+
+const neighbourhoods = [
+  { area: 'Lower City', list: 'Downtown, Corktown, Durand, Kirkendall, Strathcona, Beasley, Gibson, Landsdale, Crown Point, Stipeley, Barton Village' },
+  { area: 'West Hamilton', list: 'Westdale, Ainslie Wood' },
+  { area: 'Hamilton Mountain', list: 'Hill Park, Sherwood, Berrisfield, Inch Park, Rolston, Bonnington' },
+  { area: 'East End and Stoney Creek', list: '' },
+  { area: 'Ancaster, Dundas, Waterdown, Flamborough, Glanbrook and Binbrook', list: '' },
+];
+
+const situations = [
+  { t: 'Inherited or estate properties.', d: 'Selling a parent’s house during probate, or a property no one wants to manage.', href: '/ontario/inherited-house/' },
+  { t: 'Houses that need major repairs.', d: 'Foundation, roof, water or fire damage, outdated wiring or plumbing.', href: '/situations/house-needs-repairs/' },
+  { t: 'Tenant problems.', d: 'Rentals with tenants in place, unpaid rent, or a long wait at the Landlord and Tenant Board.', href: '/ontario/sell-house-with-tenants/' },
+  { t: 'Power of sale.', d: 'Behind on mortgage payments or received a Notice of Sale from your lender.', href: '/ontario/power-of-sale/' },
+  { t: 'Divorce or separation.', d: 'A fast, private sale so both sides can move on.', href: '/situations/divorce/' },
+  { t: 'Relocating or downsizing.', d: 'Moving for work or into something smaller on a fixed timeline.', href: '/situations/relocating/' },
+  { t: 'Vacant or problem properties.', d: 'Empty houses, work orders, or permit issues.', href: '/situations/house-needs-repairs/' },
+];
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Ontario', path: '/ontario/' },
+  { name: 'Hamilton', path },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: site.name,
+    url: new URL(path, site.url).href,
+    image: `${site.url}/og-image.png`,
+    description,
+    ...(hasPhone && { telephone: site.phoneE164 }),
+    ...(site.email && { email: site.email }),
+    areaServed: areas.map((name) => ({ '@type': 'City', name })),
+  },
+  faqSchema(faqs),
+  breadcrumbSchema(crumbs),
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-intro">
+        <h1>We Buy Houses in Hamilton, In Any Condition</h1>
+        <p class="lead">Sell your Hamilton house as-is for cash. No repairs, no showings, no agent commissions, and you choose the closing date.</p>
+        <ul class="badges" aria-label="Highlights">
+          <li>No Repairs</li><li>No Commissions</li><li>You Pick the Date</li>
+        </ul>
+      </div>
+      <div id="form" class="hero-form">
+        <LeadForm province="Ontario" buttonText={button} note={formNote} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Why Hamilton homeowners sell to a cash buyer</h2>
+      <p>Listing a house in Hamilton usually means repairs, staging, weeks of showings and waiting on a buyer’s financing, then paying commission at the end. Selling direct skips all of that. You get a straightforward offer, you don’t fix anything, and you close when it suits you.</p>
+
+      <h2>Neighbourhoods we buy in</h2>
+      <ul>
+        {neighbourhoods.map((n) => <li>{n.list ? <><strong>{n.area}:</strong> {n.list}</> : <strong>{n.area}</strong>}</li>)}
+      </ul>
+
+      <h2>Hamilton houses, and the problems we see</h2>
+      <p>A lot of Hamilton’s housing stock is old, and that’s often why owners call us. Century brick homes in the lower city can come with knob-and-tube wiring, galvanized or cast-iron plumbing, or an older lead water service line. Basements across the city deal with leaks and flooding. Rentals near McMaster in Westdale and Ainslie Wood can be worn down after years of student tenants. We buy all of these as they are, so you don’t have to take on the repairs or the inspection fight with a retail buyer.</p>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><h3>Tell us about the property.</h3><p>Fill out the form; it takes about a minute.</p></li>
+        <li><h3>Get a fair cash offer.</h3><p>We look at the house and explain how we got to the number.</p></li>
+        <li><h3>Pick your closing date.</h3><p>Close through a real estate lawyer, on the date that works for you.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section cta-form">
+    <div class="wrap cta-grid">
+      <div>
+        <h2>Get a cash offer for your Hamilton house</h2>
+        <p>Tell us a little about the property. A real person reviews every one, and there’s no obligation.</p>
+      </div>
+      <div id="form-2" class="form-anchor">
+        <LeadForm heading="Request your offer" province="Ontario" buttonText={button} note={formNote} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <CompareTable />
+
+      <h2>Situations we help with in Hamilton</h2>
+      <ul>
+        {situations.map((s) => <li><a href={s.href}><strong>{s.t}</strong></a> {s.d}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} />
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Areas we serve around Hamilton</h2>
+      <p>Hamilton, Stoney Creek, Ancaster, Dundas, Waterdown, Flamborough, Glanbrook, Binbrook and Hamilton Mountain.</p>
+      <p>See all the places we buy in <a href="/ontario/">Ontario</a>.</p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Ready to see what we can offer for your Hamilton house?</h2>
+      <a class="btn btn-primary" href="#form-3">{button}</a>
+    </div>
+  </section>
+
+  <section class="section cta-form">
+    <div class="wrap narrow">
+      <div id="form-3" class="form-anchor">
+        <LeadForm heading="Request your offer" province="Ontario" buttonText={button} note={formNote} />
+      </div>
+    </div>
+  </section>
+
+  <SmallPrint />
+</Base>

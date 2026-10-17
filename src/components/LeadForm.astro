@@ -4,9 +4,11 @@ import { site } from '../data/site';
 interface Props {
   heading?: string;
   province?: 'Ontario' | 'Alberta'; // preselects the province on province/city pages
+  buttonText?: string;
+  note?: string; // small line shown under the form
 }
 
-const { heading = 'Get your free cash offer', province } = Astro.props;
+const { heading = 'Get your free cash offer', province, buttonText = 'Get my cash offer', note } = Astro.props;
 ---
 
 <div class="lead-form-card">
@@ -87,10 +89,11 @@ const { heading = 'Get your free cash offer', province } = Astro.props;
       You can ask us to stop at any time. See our <a href="/privacy/">privacy policy</a>.
     </p>
 
-    <button type="submit" class="btn btn-primary btn-block">Get my cash offer</button>
+    <button type="submit" class="btn btn-primary btn-block">{buttonText}</button>
     <p class="form-error" role="alert" hidden>
       Something went wrong sending your details. Please try again or call us.
     </p>
+    {note && <p class="form-note">{note}</p>}
   </form>
 
   <div class="form-thanks" role="status" hidden>

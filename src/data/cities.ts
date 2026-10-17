@@ -2,11 +2,13 @@
 // Keep every entry genuinely local: neighbourhoods, housing stock and what sellers there deal with.
 
 export interface City {
+  description: string; // generated below from one pattern
   slug: string;
   name: string;
   province: 'ontario' | 'alberta';
   title: string; // <title>, under 60 characters
-  description: string;
+  descName?: string; // name used in the meta description, if different from `name`
+  custom?: boolean; // has its own hand-built page instead of the city template
   intro: string;
   neighbourhoods: string[];
   housing: string[]; // paragraphs about local housing stock and common issues
@@ -14,14 +16,13 @@ export interface City {
   situations: string[]; // slugs of the most relevant situation pages
 }
 
-export const cities: City[] = [
+const cityData: Omit<City, 'description'>[] = [
   {
     slug: 'toronto',
     name: 'Toronto & the GTA',
+    descName: 'Toronto or GTA',
     province: 'ontario',
     title: 'Sell Your House Fast in Toronto | Cash Offer, As-Is',
-    description:
-      'Sell your Toronto or GTA house as-is for cash. No repairs, showings or agent fees. Inherited homes, rentals and houses that need work. You pick the closing date.',
     intro:
       'Toronto homes sell well when they are polished and listed. Plenty of houses in the GTA aren’t in that shape, though: a parent’s bungalow that hasn’t been updated since the 1970s, a semi with a basement that takes on water, or a rental with tenants who don’t want showings. We buy those houses as they are.',
     neighbourhoods: [
@@ -39,12 +40,26 @@ export const cities: City[] = [
     situations: ['ontario-inherited', 'ontario-tenants', 'repairs', 'ontario-power-of-sale'],
   },
   {
+    slug: 'hamilton',
+    name: 'Hamilton',
+    province: 'ontario',
+    custom: true, // page lives in src/pages/ontario/hamilton.astro
+    title: 'Sell Your House Fast in Hamilton, ON | We Buy Houses As-Is',
+    intro: 'We buy houses in Hamilton in any condition, for cash.',
+    neighbourhoods: [
+      'Downtown', 'Corktown', 'Durand', 'Kirkendall', 'Strathcona', 'Beasley', 'Gibson', 'Landsdale', 'Crown Point',
+      'Stipeley', 'Barton Village', 'Westdale', 'Ainslie Wood', 'Hamilton Mountain', 'Stoney Creek', 'Ancaster',
+      'Dundas', 'Waterdown', 'Flamborough', 'Glanbrook', 'Binbrook',
+    ],
+    housing: [],
+    local: [],
+    situations: ['ontario-inherited', 'repairs', 'ontario-tenants', 'ontario-power-of-sale'],
+  },
+  {
     slug: 'ottawa',
     name: 'Ottawa',
     province: 'ontario',
     title: 'Sell Your House Fast in Ottawa | Cash Offer, Any Condition',
-    description:
-      'Sell your Ottawa house as-is for a fair cash offer. No repairs, showings or commissions. Estates, rentals, damaged homes and tight timelines. You choose the closing date.',
     intro:
       'Ottawa has a lot of steady, well-kept housing, but it also has older homes that need more than a coat of paint, plenty of rentals near the universities and military postings that force quick moves. If listing your house feels like a project you don’t have time for, we can make you an offer on it as it is.',
     neighbourhoods: [
@@ -66,8 +81,6 @@ export const cities: City[] = [
     name: 'London',
     province: 'ontario',
     title: 'Sell Your House Fast in London, ON | Cash Offer, As-Is',
-    description:
-      'Sell your London, Ontario house as-is for cash. No repairs, cleanup or showings. Student rentals, estates and older homes. Fair offer, and you pick the closing date.',
     intro:
       'London has everything from Victorian homes in Old South to 1960s bungalows in Westmount and student rentals around Western and Fanshawe. If yours needs work, has tenants, or is part of an estate, selling it the usual way can take a lot of time and money up front. We buy houses in London as they are.',
     neighbourhoods: [
@@ -89,8 +102,6 @@ export const cities: City[] = [
     name: 'Kitchener-Waterloo',
     province: 'ontario',
     title: 'Sell Your House Fast in Kitchener-Waterloo | Cash Offer',
-    description:
-      'Sell your Kitchener, Waterloo or Cambridge house as-is for cash. No repairs, showings or agent fees. Rentals, estates and older homes. You choose the closing date.',
     intro:
       'Kitchener-Waterloo has grown quickly, but a lot of the region’s houses are still older homes that need updating, or rentals near the universities. If you want to sell without renovating, cleaning out or dealing with showings, we can make you a cash offer on the house as it stands.',
     neighbourhoods: [
@@ -112,8 +123,6 @@ export const cities: City[] = [
     name: 'Windsor',
     province: 'ontario',
     title: 'Sell Your House Fast in Windsor, ON | Cash Offer, As-Is',
-    description:
-      'Sell your Windsor house as-is for a fair cash offer. No repairs, showings or commissions. Flood damage, older homes, rentals and estates. You pick the closing date.',
     intro:
       'Windsor has some of the most affordable older housing in Ontario, and a lot of it needs work. Basement flooding, aging brick homes and long-held rentals are common reasons people here decide to sell as-is instead of fixing up and listing.',
     neighbourhoods: [
@@ -135,8 +144,6 @@ export const cities: City[] = [
     name: 'Sudbury',
     province: 'ontario',
     title: 'Sell Your House Fast in Sudbury | Cash Offer, Any Condition',
-    description:
-      'Sell your Greater Sudbury house as-is for cash. No repairs, showings or agent fees. Older homes, estates, rentals and moves. Fair offer, and you choose the closing date.',
     intro:
       'Greater Sudbury is a big area with a lot of older housing, much of it built for mining families decades ago. If your house needs updates, is part of an estate or you need to move for work, we can make you a cash offer and close on your schedule.',
     neighbourhoods: [
@@ -158,8 +165,6 @@ export const cities: City[] = [
     name: 'Calgary',
     province: 'alberta',
     title: 'Sell Your House Fast in Calgary | Cash Offer, Any Condition',
-    description:
-      'Sell your Calgary house as-is for a fair cash offer. No repairs, showings or agent fees. Hail damage, older bungalows, rentals and estates. You pick the closing date.',
     intro:
       'Calgary’s market moves quickly for move-in-ready homes. Houses with hail damage, dated 1960s interiors, tenants or a complicated situation can still sit. We buy Calgary houses as they are, so you can skip the repairs and showings.',
     neighbourhoods: [
@@ -181,8 +186,6 @@ export const cities: City[] = [
     name: 'Edmonton',
     province: 'alberta',
     title: 'Sell Your House Fast in Edmonton | Cash Offer, As-Is',
-    description:
-      'Sell your Edmonton house as-is for cash. No repairs, cleanup or showings. Older bungalows, rentals, estates and foreclosure situations. You choose the closing date.',
     intro:
       'Edmonton has a lot of older, affordable housing, from Alberta Avenue’s early-1900s homes to Mill Woods’ 1970s splits. If yours needs work, is rented out or is part of an estate, we can make you a cash offer on it as it is and close when it suits you.',
     neighbourhoods: [
@@ -204,8 +207,6 @@ export const cities: City[] = [
     name: 'Red Deer',
     province: 'alberta',
     title: 'Sell Your House Fast in Red Deer | Cash Offer, As-Is',
-    description:
-      'Sell your Red Deer house as-is for a fair cash offer. No repairs, showings or commissions. Older homes, rentals, estates and job moves. You pick the closing date.',
     intro:
       'Red Deer sits between Calgary and Edmonton, and its housing market follows the oil and gas economy more closely than most. If you need to sell an older house, a rental or an inherited home without repairs or showings, we can make you a cash offer.',
     neighbourhoods: [
@@ -227,8 +228,6 @@ export const cities: City[] = [
     name: 'Lethbridge',
     province: 'alberta',
     title: 'Sell Your House Fast in Lethbridge | Cash Offer, As-Is',
-    description:
-      'Sell your Lethbridge house as-is for cash. No repairs, cleanup or showings. Older homes, student rentals and estates. Fair cash offer, and you choose the closing date.',
     intro:
       'Lethbridge has a mix of early-1900s homes near downtown, post-war bungalows and rentals near the university and college. If yours needs work or comes with a complicated situation, we can make you an offer on it as it is.',
     neighbourhoods: [
@@ -246,5 +245,10 @@ export const cities: City[] = [
     situations: ['alberta-tenants', 'alberta-inherited', 'repairs', 'downsizing'],
   },
 ];
+
+export const cities: City[] = cityData.map((c) => ({
+  ...c,
+  description: `Need to sell your ${c.descName ?? c.name} house fast? We buy houses as-is for cash. No repairs, no showings, no commissions. Get a fair, no-obligation offer and pick your closing date.`,
+}));
 
 export const citiesIn = (province: 'ontario' | 'alberta') => cities.filter((c) => c.province === province);

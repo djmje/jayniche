@@ -2,11 +2,12 @@
 // City pages (/ontario/ottawa/) and province-specific situation pages (/ontario/power-of-sale/).
 import ContentPage from '../../layouts/ContentPage.astro';
 import SituationBody from '../../components/SituationBody.astro';
+import CompareTable from '../../components/CompareTable.astro';
 import { cities, type City } from '../../data/cities';
 import { situations, situationByKey, type Situation } from '../../data/situations';
 
 export function getStaticPaths() {
-  const cityPaths = cities.map((c) => ({
+  const cityPaths = cities.filter((c) => !c.custom).map((c) => ({
     params: { province: c.province, slug: c.slug },
     props: { city: c },
   }));
@@ -50,6 +51,7 @@ const cityFaqs = city && [
     faqs={cityFaqs}
     province={provinceName}
     ctaHeading={`Get a cash offer for your ${city.name} house`}
+    smallPrint
   >
     <section class="section">
       <div class="wrap prose">
@@ -69,6 +71,8 @@ const cityFaqs = city && [
           <li><strong>Get a fair cash offer</strong> reviewed by a real person. If you accept, you pick the closing date.</li>
         </ol>
         <p><a href="/how-it-works/">More on how it works</a></p>
+
+        <CompareTable />
 
         <h2>Situations we help with in {city.name}</h2>
         <ul class="link-grid">
