@@ -11,7 +11,7 @@ export const site = {
   phoneE164: '',
   email: '', // shown on the site (footer, Contact page). Keep empty: no public email.
   // Only in the hidden business info (schema) Google reads, never shown on a page.
-  googleEmail: 'readbyjay@gmail.com',
+  googleEmail: 'jay@jayniche.ca',
 
   instagram: 'https://www.instagram.com/jayhomebuyers/',
 
